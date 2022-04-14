@@ -1,0 +1,60 @@
+*{margin:0; padding:0;}
+
+@keyframes rotate{
+  100% {
+    transform: rotate(360deg);
+    // 시계방향은 360, 반시계방향은 360
+  }
+}
+@keyframes rotate-reverse{
+  100% {
+    transform: rotate(-360deg);
+    // 시계방향은 360, 반시계방향은 360
+  }
+}
+
+
+#root {
+  width: 100vw; height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+  & > div {
+    width: 200px; height: 200px;
+    background-color: black;
+    border-radius: 200px;
+    box-shadow: 5px 5px 10px #ccc;
+    margin-bottom: 30px;
+    position: relative;
+    
+    
+    & > div {
+      width: 50px; height: 50px;
+      background-color: white;
+      border-radius: 50px;
+      position: absolute;
+      right: 10px;
+      top:40%;
+    }
+    
+  }
+  
+  & > div:hover {
+    background-color: palevioletred;
+    animation: 5s linear infinite rotate ;
+  }
+
+  // 두 번째 div는 반시계방향으로 돌아가게
+  & > div:nth-child(2):hover {
+    background-color: cornflowerblue;
+    animation: 5s linear infinite rotate-reverse ;
+  }
+
+}
+
+
+
+// ???hover를 이용해 애니메이션이 재생되는 형태로 작업을 했는데, 작은 원을 드래그해서 원이 움직일 수 있게 만드는 방법은 없을까? 자바스크립트를...써야하나...?
