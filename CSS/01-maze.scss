@@ -1,0 +1,142 @@
+$day-mint-l: #1FC9C8;
+$day-mint-d: #35B0B0;
+$day-mint: #C9F3F2;
+$day-violet: #7A58C3;
+$day-lemon: #F5F0DD;
+$day-sky: #D1DDEC;
+$day-text: #665673;
+$day-shadow: rgba(44, 66, 74, 0.5);
+
+*{margin: 0; padding: 0;}
+
+@mixin flex ($jus, $ali, $dir) {
+  display: flex;
+  justify-content: $jus;
+  align-items: $ali;
+  flex-direction: $dir;
+}
+
+#root {
+  width: 100vw; height: 100vh;
+  @include flex(center, center, row);
+  background-color: #c4c4c4;
+
+
+  & > div:first-child {
+    width: 348px; height: 846px;
+    border-radius: 20px;
+    padding: 40px;
+    background: linear-gradient($day-sky, $day-lemon);
+    position: relative;
+
+    
+    // 상단의 환경설정 버튼(2개)
+    & > header {
+      width: 100%; height: 40px;
+      @include flex(flex-end, center, row);
+
+      & > div {
+        width: 40px; height: 40px;
+        border-radius: 20px;
+        background-color: $day-lemon;
+        box-shadow: 0 4px 4px $day-shadow;
+      }
+      & > div:first-child {
+        background-color: $day-mint-l;
+      }
+    }
+
+    // 환경설정 버튼을 누르면 나올 환경설정 창
+    & > nav {
+      @include flex(space-between, center, column);
+      width: 100%; height: 20vh;
+      padding: 3vh 0 3vh 0;
+      border-radius: 30px;
+      margin-top: 15vh;
+      box-shadow: 0 4px 4px $day-shadow;
+      background-color: #fff;
+    
+      // 버튼 영역 (동그란 버튼들)
+      & > div:nth-child(1) {
+        @include flex(space-between, center, row);
+        width: 60%; height: 55%;
+        // background-color: #c4c4c4;
+
+        & > div {
+          // 버튼
+          & > div:nth-child(1) {
+            width: 60px; height: 60px;
+            border-radius: 30px;
+            background-color: $day-mint-l;
+          }
+          // 글씨
+          & > div:nth-child(2){
+            margin-top: 1vh;
+            text-align: center;
+            font-size: 14px;
+            color: $day-text;
+          }
+        }
+      }
+
+      & > div:nth-child(2) {
+        @include flex(center, center, row);
+        width: 80%; height: 63px;
+        border-radius: 30px;
+        background-color: $day-mint;
+
+        & > p{
+          color: $day-mint-d;
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+    
+    }
+  
+    & > main {
+      @include flex(flex-end, center, column);
+      width: 80%; height: 23%;
+      position: absolute;
+      bottom: 40px;
+
+      & > div {
+        width: 50px; height: 50px;
+        border-radius: 30px;
+        background-color: $day-mint-l;
+        opacity: 0.5;
+        position: absolute;
+      }
+
+      & > div:nth-child(1) {
+        left: 0;
+        bottom: 15px;
+      }
+      & > div:nth-child(2) {
+        top: 0;
+      }
+      // 유저 아이콘
+      & > div:nth-child(3) {
+        width: 90px; height: 90px;
+        border-radius: 50px;
+        opacity: 1;
+      }
+      & > div:nth-child(4) {
+        right: 0;
+        bottom: 15px;
+      }
+      
+      & > div:hover {
+        background-color: $day-mint;
+      }
+
+      & > div:nth-child(3):hover {
+        background-color: $day-mint-l;
+      }
+    }
+
+
+
+  }
+
+}
