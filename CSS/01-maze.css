@@ -19,6 +19,7 @@
   padding: 40px;
   background: linear-gradient(#D1DDEC, #F5F0DD);
   position: relative;
+  overflow: hidden;
 }
 #root > div:first-child > header {
   width: 100%;
@@ -95,6 +96,7 @@
   height: 23%;
   position: absolute;
   bottom: 40px;
+  z-index: 2;
 }
 #root > div:first-child > main > div {
   width: 50px;
@@ -126,4 +128,14 @@
 }
 #root > div:first-child > main > div:nth-child(3):hover {
   background-color: #1FC9C8;
+}
+#root > div:first-child > footer {
+  position: absolute;
+  z-index: 0;
+}
+#root > div:first-child > footer > div {
+  width: 428px;
+  height: 886px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=01-maze.css.map */

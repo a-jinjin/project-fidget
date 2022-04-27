@@ -28,6 +28,7 @@ $day-shadow: rgba(44, 66, 74, 0.5);
     padding: 40px;
     background: linear-gradient($day-sky, $day-lemon);
     position: relative;
+    overflow: hidden;
 
     
     // 상단의 환경설정 버튼(2개)
@@ -99,6 +100,7 @@ $day-shadow: rgba(44, 66, 74, 0.5);
       width: 80%; height: 23%;
       position: absolute;
       bottom: 40px;
+      z-index: 2;
 
       & > div {
         width: 50px; height: 50px;
@@ -135,7 +137,16 @@ $day-shadow: rgba(44, 66, 74, 0.5);
       }
     }
 
+    & > footer {
+      position: absolute;
+      z-index: 0;
 
+      & > div{
+        width: 428px; height: 886px;
+        object-fit: cover;
+      }
+
+    }
 
   }
 
