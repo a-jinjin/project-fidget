@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root">
+    <div>top</div>
+    <div>left</div>
+    <div>right</div>
+    <div>move</div>
+  </div>
+
+  <script>
+    const root = document.getElementById('root');
+    const topb = root.children[0];
+    const leftb = root.children[1];
+    const rightb = root.children[2];
+    const move = root.children[3];
+
+    // move가 더 잘보이게 하려고 배경색상지정
+    move.style.width = '100px';
+    move.style.height = '100px';
+    move.style.backgroundColor = 'orange';
+
+    console.dir(top);
+    
+    move.style.position = 'absolute';
+    let value = 0;
+    move.style.left = value+'px';
+    console.log(move.style.left);
+
+    leftb.addEventListener('click', function(){
+      value++;
+      move.style.left = value+'px';
+
+      console.log('left='+move.style.left);
+      console.log('top='+move.style.top);
+      console.log('right='+move.style.right);
+    });
+
+    
+    topb.addEventListener('click', function(){
+      value++;
+      move.style.top = value+'px';
+
+      console.log('left='+move.style.left);
+      console.log('top='+move.style.top);
+      console.log('right='+move.style.right);
+    })
+
+    rightb.addEventListener('click', function(){
+      move.style.left = '';
+      value++;
+      move.style.right = value+'px';
+      
+      console.log('left='+move.style.left);
+      console.log('top='+move.style.top);
+      console.log('right='+move.style.right);
+    })
+
+    // ===> 뭔가...움직이긴 하는데 영......이상하게 움직인다.
+    
+    // left.addEventListener('click', function(){
+      // let num = 0;
+      // move.style.left = num+'px';
+      // move.offsetLeft = 10;
+      
+      // console.dir(move);
+      // console.log(move.style.left);
+
+      // if(num === 0){
+      //   move.style.left = num+'px';
+      //   console.log(num);
+      // }else{
+      //   num = num-10;
+      //   move.style.left = num+'px';
+      //   console.log(num);
+      // }
+    // });
+
+    
+
+  </script>
+</body>
+</html>
