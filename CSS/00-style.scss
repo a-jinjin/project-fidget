@@ -1,0 +1,159 @@
+*{padding:0; margin:0;}
+
+// 색상변수
+$day-bg1: #d1ddec;
+$day-bg2: #f5f0dd;
+$day-mint: #1FC9C8;
+$day-mint-dark: #35B0B0;
+$day-mint-light: #C9F3F2;
+$day-shadow: rgba(44, 66, 74, 0.5);
+$day-text: #665673;
+
+@mixin flex($jus, $ali, $dirc) {
+  display: flex;
+  justify-content: $jus;
+  align-items: $ali;
+  flex-direction: $dirc  
+}
+
+#root {
+  @include flex(space-between, center, column);
+  background: linear-gradient($day-bg1, $day-bg2);
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  // 상단 설정버튼 영역
+  & > div:first-child {
+    @include flex(flex-end, center, row);
+    width: 80vw; height: 5vh;
+    // background-color: gray;
+    position: fixed;
+    z-index: 1;
+    top: 10vh;
+
+    // div 전체 모양과 크기 설정
+    & > div {
+      width: 5vh; height: 5vh;
+      border-radius: 3vh;
+      background-color: $day-bg2;
+      box-shadow: 0 4px 4px $day-shadow;
+    }
+
+    // 기본으로 보여질 버튼(세팅버튼)의 컬러 지정
+    & > div:nth-child(1) {
+      background-color: $day-mint;
+    }
+
+  }
+
+  // 설정버튼 누르면 나올 상자
+  & > div:nth-child(2) {
+    @include flex(center, center, column);
+    width: 80vw; height: 26vh;
+    background-color: #fff;
+    box-shadow: 4px 4px 7px $day-shadow;
+    border-radius: 2vh;
+    position: absolute;
+    z-index: 1;
+    top:20vh;
+    
+    // 소리설정-밝기설정 버튼 들어갈 영역
+    & > div:nth-child(1){
+      @include flex(space-between, center, row);
+      width: 40vw; height: 10vh;
+      
+      // 버튼-글씨 묶어둔 box 크기지정
+      & > div{
+        @include flex(space-between, center, column);
+        width: 17vw; height: 10vh;
+        // 소리-밝기 아이콘 크기와 모양 지정
+        & > div:nth-child(1){
+          width: 7vh; height: 7vh;
+          border-radius: 4vh;
+        }
+        // 소리-밝기 텍스트 크기와 색상 지정
+        & > p:last-child {
+          font-size: 14px;
+          color: $day-text;
+        }
+      }
+      // 소리 아이콘 색상지정
+      & > div:nth-child(1) {
+        & > div:nth-child(1) {
+          background-color: $day-mint;
+        }
+      }
+      // 밝기 아이콘 색상지정
+      & > div:nth-child(2) {
+        & > div:nth-child(1) {
+          background-color: $day-bg2;
+        }
+      }
+    }
+    
+    // 종료하기 버튼
+    & > div:nth-child(2){
+      width: 60vw; height: 5vh;
+      border-radius: 5vh;
+      margin-top: 2vh;
+      background-color: $day-mint-light;
+    }
+  }
+
+  // 방향키 들어갈 공간
+  & > div:nth-child(3) {
+    @include flex(flex-end, center, column);
+    width: 80vw; height: 22vh;
+    // background-color: gray;
+    position: absolute;
+    z-index: 1;
+    bottom: 10vh;
+    
+    // 방향키 전체 크기-색상 지정
+    & > div {
+      width: 5vh; height: 5vh;
+      border-radius: 3vh;
+      background: $day-mint-light;
+      box-shadow: 2px 2px 2px $day-shadow;
+      opacity: 0.7;
+      position: absolute;
+    }
+
+    // user 아이콘만 크기 다시 지정
+    & > div:first-child{
+      width: 8vh; height: 8vh;
+      border-radius: 4vh;
+      opacity: 1;
+      box-shadow: 0 0 1vh #fff;
+      background-color: $day-mint-dark;
+    }
+
+    & > div:nth-child(2) {
+      top: 0;
+    }
+
+    & > div:nth-child(3) {
+      left: 0;
+      bottom: 1.5vh;
+    }
+    
+    & > div:nth-child(4){
+      right: 0;
+      bottom: 1.5vh;
+    }
+  }
+
+  // 배경이미지 들어갈 공간
+  & > div:last-child {
+    width: 100vw; height: 100vh;
+    background-image: url(../SVG/road.svg);
+    position: absolute;
+    z-index: 0;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: auto 150%;
+  }
+
+
+}
