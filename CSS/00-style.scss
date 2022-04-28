@@ -16,6 +16,17 @@ $day-text: #665673;
   flex-direction: $dirc  
 }
 
+@keyframes updown{
+  from { top: 10vh; }
+  to   { top: 11vh; opacity: 0.3;}
+}
+
+@keyframes twinkle{
+  from { box-shadow: 0 0 0 #fff; }
+  to   { box-shadow: 0 0 2vh #fff;}
+}
+
+
 #root {
   @include flex(space-between, center, column);
   background: linear-gradient($day-bg1, $day-bg2);
@@ -29,20 +40,22 @@ $day-text: #665673;
     width: 80vw; height: 5vh;
     // background-color: gray;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     top: 10vh;
 
     // div 전체 모양과 크기 설정
     & > div {
       width: 5vh; height: 5vh;
       border-radius: 3vh;
-      background-color: $day-bg2;
+      // background-color: $day-bg2;
+      background-image: url(../SVG/day-exitbtn.svg);
       box-shadow: 0 4px 4px $day-shadow;
     }
 
     // 기본으로 보여질 버튼(세팅버튼)의 컬러 지정
     & > div:nth-child(1) {
-      background-color: $day-mint;
+      // background-color: $day-mint;
+      background-image: url(../SVG/day-settingbtn.svg);
     }
 
   }
@@ -55,7 +68,7 @@ $day-text: #665673;
     box-shadow: 4px 4px 7px $day-shadow;
     border-radius: 2vh;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     top:20vh;
     
     // 소리설정-밝기설정 버튼 들어갈 영역
@@ -94,10 +107,14 @@ $day-text: #665673;
     
     // 종료하기 버튼
     & > div:nth-child(2){
+      @include flex(center, center, row);
       width: 60vw; height: 5vh;
       border-radius: 5vh;
       margin-top: 2vh;
       background-color: $day-mint-light;
+      color: $day-mint-dark;
+      font-weight: bold;
+      font-size: 18px;
     }
   }
 
@@ -107,14 +124,14 @@ $day-text: #665673;
     width: 80vw; height: 22vh;
     // background-color: gray;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     bottom: 10vh;
     
     // 방향키 전체 크기-색상 지정
     & > div {
       width: 5vh; height: 5vh;
       border-radius: 3vh;
-      background: $day-mint-light;
+      // background: $day-mint-light;
       box-shadow: 2px 2px 2px $day-shadow;
       opacity: 0.7;
       position: absolute;
@@ -122,26 +139,57 @@ $day-text: #665673;
 
     // user 아이콘만 크기 다시 지정
     & > div:first-child{
-      width: 8vh; height: 8vh;
-      border-radius: 4vh;
+      width: 9vh; height: 9vh;
+      border-radius: 5vh;
       opacity: 1;
-      box-shadow: 0 0 1vh #fff;
-      background-color: $day-mint-dark;
+      animation: 2s linear 1s infinite alternate twinkle;
+      background-image: url(../SVG/user-icon.svg);
     }
 
     & > div:nth-child(2) {
       top: 0;
+      background-image: url(../SVG/day-arrow-off-02.svg);
+    }
+    & > div:nth-child(2):hover {
+      background-image: url(../SVG/day-arrow-on-02.svg);
     }
 
     & > div:nth-child(3) {
       left: 0;
       bottom: 1.5vh;
+      background-image: url(../SVG/day-arrow-off-01.svg);
+    }
+    & > div:nth-child(3):hover {
+      background-image: url(../SVG/day-arrow-on-01.svg);
     }
     
     & > div:nth-child(4){
       right: 0;
       bottom: 1.5vh;
+      background-image: url(../SVG/day-arrow-off-03.svg);
     }
+    & > div:nth-child(4):hover {
+      background-image: url(../SVG/day-arrow-on-03.svg);
+    }
+
+  }
+
+  // 세팅상자가 활성화되면 보여질 것. (화면 어둡게+블러)
+  & > div:nth-child(4) {
+    width: 100vw; height: 100vh;
+    background-color: $day-shadow;
+    backdrop-filter: blur(2px);
+    position: absolute;
+    z-index: 2;
+  }
+
+  & > div:nth-child(5) {
+    width: 95%; height: 100%;
+    background-image: url(../SVG/day-twinkle.svg);
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 1;
+    animation: 2s linear 1s infinite alternate updown;
   }
 
   // 배경이미지 들어갈 공간
@@ -150,7 +198,7 @@ $day-text: #665673;
     background-image: url(../SVG/road.svg);
     position: absolute;
     z-index: 0;
-    background-position: center bottom;
+    background-position: 50% 100%;
     background-repeat: no-repeat;
     background-size: auto 150%;
   }

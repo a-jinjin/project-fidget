@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>00-fidget-maze</title>
   <link rel="stylesheet" href="./CSS/00-style.css">
 </head>
 <body>
@@ -27,16 +27,18 @@
           <p>밝기모드</p>
         </div>
       </div>
-      <div></div>
+      <div><p>종료하기</p></div>
     </div>
     <!-- 방향키 놓을 공간 -->
     <div>
       <div></div>
       <div id="btnTop"></div>
-      <div></div>
-      <div></div>
+      <div id="btnLeft"></div>
+      <div id="btnRight"></div>
     </div>
     <!-- 설정버튼 누르면 나올 전체박스(어둡게 만들어줄것) -->
+    <div id="bgBlack"></div>
+    <!-- 트윙클트윙클 -->
     <div></div>
     <!-- 배경이미지 둘 공간 -->
     <div id="bgImg"></div>
@@ -48,35 +50,77 @@
     const setBtn = document.getElementById('setBtn');
     const setExit = document.getElementById('exitBtn');
     const settingBox = document.getElementById('settingBox');
+    const bgBlack = document.getElementById('bgBlack');
     
     console.log(setBtn);
     console.log(setExit);
     console.dir(settingBox);
 
+    // 설정박스 토글
     settingBox.style.display = 'none';
     setExit.style.display = 'none';
+    bgBlack.style.display = 'none';
 
     setBtn.addEventListener('click', function(){
       setExit.style.display = '';
       setBtn.style.display = 'none';
       settingBox.style.display = '';
+      bgBlack.style.display = '';
     });
 
     setExit.addEventListener('click', function(){
       setExit.style.display = 'none';
       setBtn.style.display = '';
       settingBox.style.display = 'none';
+      bgBlack.style.display = 'none';
     });
 
 
     // 방향키
     const btnTop = document.getElementById('btnTop');
-    console.log(btnTop);
+    // console.log(btnTop);
+    const btnLeft = document.getElementById('btnLeft');
+    const btnRight = document.getElementById('btnRight');
+    
+    // 움직일 배경이미지
     const bgImg = document.getElementById('bgImg');
-    console.log(bgImg);
+    // console.log(bgImg);
 
+    let imgX = 50;
+    let imgY = 100;
+    // 배경이미지의 기본 position 값을 변수로 지정
+
+    // 위로 가기 버튼
     btnTop.addEventListener('click', function(){
-      bgImg.style.top = '30px';
+      // bgImg.style.top = '30px';
+      console.dir(bgImg.style);
+      bgImg.style.backgroundPosition = `${imgX}% ${imgY-5}%`;
+      imgY = imgY-5;
+    });
+
+    // 왼쪽으로 가기 버튼
+    btnLeft.addEventListener('click', function(){
+      // bgImg.style.top = '30px';
+      console.dir(bgImg.style);
+      bgImg.style.backgroundPosition = `${imgX-5}% ${imgY}%`;
+      imgX = imgX-5;
+      // console.log(imgX);
+      
+      if(imgX <= 0){
+        alert('더이상 움직일 수 없습니다!');
+      } // 왼쪽 끝으로 이동하면 경고창을 띄워달라
+    });
+
+    // 오른쪽으로 가기 버튼
+    btnRight.addEventListener('click', function(){
+      // bgImg.style.top = '30px';
+      console.dir(bgImg.style);
+      bgImg.style.backgroundPosition = `${imgX+5}% ${imgY}%`;
+      imgX = imgX+5;
+      console.log(imgX)
+      if(imgX >= 100){
+        alert('더이상 움직일 수 없습니다!');
+      } // 오른쪽 끝으로 이동하면 경고창을 띄워달라
     });
 
 
