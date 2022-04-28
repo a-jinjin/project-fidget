@@ -3,6 +3,41 @@
   margin: 0;
 }
 
+@-webkit-keyframes updown {
+  from {
+    top: 10vh;
+  }
+  to {
+    top: 11vh;
+    opacity: 0.3;
+  }
+}
+
+@keyframes updown {
+  from {
+    top: 10vh;
+  }
+  to {
+    top: 11vh;
+    opacity: 0.3;
+  }
+}
+@-webkit-keyframes twinkle {
+  from {
+    box-shadow: 0 0 0 #d1ddec;
+  }
+  to {
+    box-shadow: 0 0 2vh #665673;
+  }
+}
+@keyframes twinkle {
+  from {
+    box-shadow: 0 0 0 #d1ddec;
+  }
+  to {
+    box-shadow: 0 0 2vh #665673;
+  }
+}
 #root {
   display: flex;
   justify-content: space-between;
@@ -22,18 +57,18 @@
   width: 80vw;
   height: 5vh;
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   top: 10vh;
 }
 #root > div:first-child > div {
   width: 5vh;
   height: 5vh;
   border-radius: 3vh;
-  background-color: #f5f0dd;
+  background-image: url(../SVG/day-exitbtn.svg);
   box-shadow: 0 4px 4px rgba(44, 66, 74, 0.5);
 }
 #root > div:first-child > div:nth-child(1) {
-  background-color: #1FC9C8;
+  background-image: url(../SVG/day-settingbtn.svg);
 }
 #root > div:nth-child(2) {
   display: flex;
@@ -46,7 +81,7 @@
   box-shadow: 4px 4px 7px rgba(44, 66, 74, 0.5);
   border-radius: 2vh;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: 20vh;
 }
 #root > div:nth-child(2) > div:nth-child(1) {
@@ -76,9 +111,10 @@
 }
 #root > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
   background-color: #1FC9C8;
+  background-image: url(../SVG/day-sound-off.svg);
 }
 #root > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
-  background-color: #f5f0dd;
+  background-color: url(../SVG/day-mode-on.svg);
 }
 #root > div:nth-child(2) > div:nth-child(2) {
   display: flex;
@@ -109,9 +145,10 @@
   width: 9vh;
   height: 9vh;
   border-radius: 5vh;
-  box-shadow: 0 0 1vh #fff;
-  background-color: #35B0B0;
-  position: absolute;
+  opacity: 1;
+  -webkit-animation: 2s linear 1s infinite alternate twinkle;
+          animation: 2s linear 1s infinite alternate twinkle;
+  background-image: url(../SVG/user-icon.svg);
 }
 #root > div:nth-child(3) > div:nth-child(2) {
   width: 15vh;
@@ -119,7 +156,27 @@
   background-image: url(../SVG/rose-01.svg);
   background-repeat: no-repeat;
   position: absolute;
-  right: -20vw;
+  right: -19vw;
+  bottom: -30%;
+}
+#root > div:nth-child(4) {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(44, 66, 74, 0.5);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  position: absolute;
+  z-index: 2;
+}
+#root > div:nth-child(5) {
+  width: 95%;
+  height: 100%;
+  background-image: url(../SVG/day-twinkle.svg);
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 1;
+  -webkit-animation: 2s linear 1s infinite alternate updown;
+          animation: 2s linear 1s infinite alternate updown;
 }
 #root > div:last-child {
   width: 100vw;
@@ -127,7 +184,7 @@
   background-image: url(../SVG/road.svg);
   position: absolute;
   z-index: 0;
-  background-position: 79% 10%;
+  background-position: 69.5% 60%;
   background-repeat: no-repeat;
-  background-size: auto 150%;
+  background-size: auto 200%;
 }/*# sourceMappingURL=01-style.css.map */

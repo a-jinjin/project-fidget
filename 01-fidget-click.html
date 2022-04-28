@@ -19,11 +19,11 @@
     <div id="settingBox">
       <div>
         <div>
-          <div></div>
+          <div id="soundMode"></div>
           <p>음량조절</p>
         </div>
         <div>
-          <div></div>
+          <div id="lightMode"></div>
           <p>밝기모드</p>
         </div>
       </div>
@@ -35,6 +35,8 @@
       <div id="rose"></div>
     </div>
     <!-- 설정버튼 누르면 나올 전체박스(어둡게 만들어줄것) -->
+    <div id="bgBlack"></div>
+    <!-- 트윙클트윙클 -->
     <div></div>
     <!-- 배경이미지 둘 공간 -->
     <div id="bgImg"></div>
@@ -53,19 +55,25 @@
 
     settingBox.style.display = 'none';
     setExit.style.display = 'none';
+    bgBlack.style.display = 'none';
 
+    
     setBtn.addEventListener('click', function(){
       setExit.style.display = '';
       setBtn.style.display = 'none';
       settingBox.style.display = '';
+      bgBlack.style.display = '';
     });
-
+    
     setExit.addEventListener('click', function(){
       setExit.style.display = 'none';
       setBtn.style.display = '';
       settingBox.style.display = 'none';
+      bgBlack.style.display = 'none';
     });
 
+
+    // userIcon을 클릭하면 장미가 변화하는 이벤트
     const userI = document.getElementById('user');
     const rose = document.getElementById('rose');
 
@@ -85,12 +93,96 @@
         // console.log(rose.style.backgroundImage);
       }
       count++
-      console.log(count);
+      // console.log(count);
 
       // 10번 클릭하면?
       if (count > 10) {
         rose.style.backgroundImage = 'url("../SVG/rose-03.svg")';
         rose.style.opacity = rose.style.opacity-0.1;
+      }
+    });
+
+
+    //라이트모드 버튼
+    const lightMode = document.getElementById('lightMode');
+    const soundMode = document.getElementById('soundMode');
+    // console.dir(settingBox.children[0].children[0].children[1]);
+    const soundModeTxt = settingBox.children[0].children[0].children[1];
+    const lightModeTxt = settingBox.children[0].children[1].children[1];
+    const appExit = settingBox.children[1];
+    const appExitText = settingBox.children[1].children[0];
+    
+    let nightVioletLight = 'rgb(142, 116, 197)';
+    let nightVioletDark = 'rgb(71, 46, 114)';
+    let nightLemon = 'rgb(130, 126, 111)';
+    let nightSky = 'rgb(70, 87, 111)';
+    let nightText = 'rgb(207, 203, 186)';
+    let dayBgLemon = 'rgb(245, 240, 221)';
+    let dayBgSky = 'rgb(209, 221, 236)';
+    let dayMint = 'rgb(31, 201, 200)';
+    let dayMintDark = 'rgb(53, 176, 176)';
+    let dayMintLight = 'rgb(201, 243, 242)';
+    let dayShadow = 'rgba(44, 66, 74, 0.5)';
+    let dayText = 'rgb(102, 86, 115)';
+
+    
+    soundMode.style.backgroundColor = dayBgLemon;
+    soundMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+    lightMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
+
+
+    lightMode.addEventListener('click', function(){
+      // console.log('클릭작동함')
+      // console.dir(lightMode) ==> rgb값으로 들어옴. 색상변수는 rgb로 선언하자.
+      
+      // day에서 최초 클릭시 (==> 다크모드로 바꿔달라)
+      if(lightMode.style.backgroundColor === ""){
+        root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
+        bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';
+        settingBox.style.backgroundColor = 'rgb(21, 21, 22)';
+        lightMode.style.backgroundImage = 'url(../SVG/night-mode-on.svg)';
+        lightMode.style.backgroundColor = nightVioletDark;
+        lightModeTxt.style.color = nightText;
+        soundMode.style.backgroundImage = 'url(../SVG/night-sound-off.svg)';
+        soundMode.style.backgroundColor = dayBgSky;
+        soundModeTxt.style.color = nightText;
+        // console.log(lightMode.style.backgroundColor);
+        setExit.style.backgroundImage = 'url(../SVG/night-exitbtn.svg)';
+        setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
+        appExit.style.backgroundColor = nightVioletLight;
+        appExitText.style.color = nightVioletDark;
+
+      // 다크모드가 한 번 실행됐었다면 (==> 다시 라이트모드로 바꿔달라)
+      }else if(lightMode.style.backgroundColor === nightVioletDark){
+        root.style.background = '';
+        bgImg.style.backgroundImage = '';
+        settingBox.style.backgroundColor = '';
+        lightMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
+        lightMode.style.backgroundColor = '';
+        lightModeTxt.style.color = '';
+        soundMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+        soundMode.style.backgroundColor = dayBgLemon;
+        soundModeTxt.style.color = '';
+        setExit.style.backgroundImage = '';
+        setBtn.style.backgroundImage = '';
+        appExit.style.backgroundColor = '';
+        appExitText.style.color = '';
+      
+      // 다크모드도 라이트모드도 다 실행됐었다면 (==> 다시 다크모드로 바꿔달라)
+      }else {
+        root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
+        bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';
+        settingBox.style.backgroundColor = 'rgb(21, 21, 22)';
+        lightMode.style.backgroundImage = 'url(../SVG/night-mode-on.svg)';
+        lightMode.style.backgroundColor = nightVioletDark;
+        lightModeTxt.style.color = nightText;
+        soundMode.style.backgroundImage = 'url(../SVG/night-sound-off.svg)';
+        soundMode.style.backgroundColor = dayBgSky;
+        soundModeTxt.style.color = nightText;
+        setExit.style.backgroundImage = 'url(../SVG/night-exitbtn.svg)';
+        setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
+        appExit.style.backgroundColor = nightVioletLight;
+        appExitText.style.color = nightVioletDark;
       }
     });
 
