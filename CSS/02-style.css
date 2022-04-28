@@ -1,0 +1,322 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@-webkit-keyframes updown {
+  from {
+    top: 10vh;
+  }
+  to {
+    top: 11vh;
+    opacity: 0.3;
+  }
+}
+
+@keyframes updown {
+  from {
+    top: 10vh;
+  }
+  to {
+    top: 11vh;
+    opacity: 0.3;
+  }
+}
+@-webkit-keyframes twinkle {
+  from {
+    box-shadow: 0 0 0 #d1ddec;
+  }
+  to {
+    box-shadow: 0 0 2vh #665673;
+  }
+}
+@keyframes twinkle {
+  from {
+    box-shadow: 0 0 0 #d1ddec;
+  }
+  to {
+    box-shadow: 0 0 2vh #665673;
+  }
+}
+@-webkit-keyframes bubble1 {
+  from {
+    width: 1vh;
+    height: 1vh;
+    border-radius: 1vh;
+    opacity: 0.9;
+    bottom: -7vh;
+    right: 7vw;
+  }
+  to {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 4vh;
+    opacity: 0;
+    bottom: 19vh;
+    right: 0;
+  }
+}
+@keyframes bubble1 {
+  from {
+    width: 1vh;
+    height: 1vh;
+    border-radius: 1vh;
+    opacity: 0.9;
+    bottom: -7vh;
+    right: 7vw;
+  }
+  to {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 4vh;
+    opacity: 0;
+    bottom: 19vh;
+    right: 0;
+  }
+}
+@-webkit-keyframes bubble2 {
+  from {
+    width: 1vh;
+    height: 1vh;
+    border-radius: 1vh;
+    opacity: 0.9;
+    bottom: -7vh;
+    right: 7vw;
+  }
+  to {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 3vh;
+    opacity: 0;
+    bottom: 10vh;
+    right: 0;
+  }
+}
+@keyframes bubble2 {
+  from {
+    width: 1vh;
+    height: 1vh;
+    border-radius: 1vh;
+    opacity: 0.9;
+    bottom: -7vh;
+    right: 7vw;
+  }
+  to {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 3vh;
+    opacity: 0;
+    bottom: 10vh;
+    right: 0;
+  }
+}
+@-webkit-keyframes bubble3 {
+  from {
+    width: 1vh;
+    height: 1vh;
+    border-radius: 1vh;
+    opacity: 0.9;
+    bottom: -7vh;
+    right: 7vw;
+  }
+  to {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 4vh;
+    opacity: 0;
+    bottom: 19vh;
+    right: 7vw;
+  }
+}
+@keyframes bubble3 {
+  from {
+    width: 1vh;
+    height: 1vh;
+    border-radius: 1vh;
+    opacity: 0.9;
+    bottom: -7vh;
+    right: 7vw;
+  }
+  to {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 4vh;
+    opacity: 0;
+    bottom: 19vh;
+    right: 7vw;
+  }
+}
+#root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(#d1ddec, #f5f0dd);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+#root > div:first-child {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  width: 80vw;
+  height: 5vh;
+  position: fixed;
+  z-index: 3;
+  top: 10vh;
+}
+#root > div:first-child > div {
+  width: 5vh;
+  height: 5vh;
+  border-radius: 3vh;
+  background-image: url(../SVG/day-exitbtn.svg);
+  box-shadow: 0 4px 4px rgba(44, 66, 74, 0.5);
+}
+#root > div:first-child > div:nth-child(1) {
+  background-image: url(../SVG/day-settingbtn.svg);
+}
+#root > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+  height: 26vh;
+  background-color: #fff;
+  box-shadow: 4px 4px 7px rgba(44, 66, 74, 0.5);
+  border-radius: 2vh;
+  position: absolute;
+  z-index: 3;
+  top: 20vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 40vw;
+  height: 10vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 17vw;
+  height: 10vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(1) {
+  width: 7vh;
+  height: 7vh;
+  border-radius: 4vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div > p:last-child {
+  font-size: 14px;
+  color: #665673;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+  background-color: #1FC9C8;
+  background-image: url(../SVG/day-sound-off.svg);
+}
+#root > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+  background-color: url(../SVG/day-mode-on.svg);
+}
+#root > div:nth-child(2) > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 60vw;
+  height: 5vh;
+  border-radius: 5vh;
+  margin-top: 2vh;
+  background-color: #C9F3F2;
+  color: #35B0B0;
+  font-weight: bold;
+  font-size: 18px;
+}
+#root > div:nth-child(3) {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  width: 80vw;
+  height: 9vh;
+  position: absolute;
+  top: 45%;
+  z-index: 2;
+}
+#root > div:nth-child(3) > div:nth-child(1) {
+  width: 9vh;
+  height: 9vh;
+  border-radius: 5vh;
+  opacity: 1;
+  -webkit-animation: 2s linear 1s infinite alternate twinkle;
+          animation: 2s linear 1s infinite alternate twinkle;
+  background-image: url(../SVG/user-icon.svg);
+}
+#root > div:nth-child(3) > div:nth-child(2) {
+  width: 1vh;
+  height: 1vh;
+  border-radius: 1vh;
+  background-color: #fff;
+  position: absolute;
+  right: 7vw;
+  bottom: -7vh;
+  -webkit-animation: 7s linear 1s infinite bubble1;
+          animation: 7s linear 1s infinite bubble1;
+}
+#root > div:nth-child(3) > div:nth-child(3) {
+  width: 1vh;
+  height: 1vh;
+  border-radius: 1vh;
+  background-color: #fff;
+  position: absolute;
+  right: 7vw;
+  bottom: -7vh;
+  -webkit-animation: 5s linear 1s infinite bubble2;
+          animation: 5s linear 1s infinite bubble2;
+}
+#root > div:nth-child(3) > div:nth-child(4) {
+  width: 1vh;
+  height: 1vh;
+  border-radius: 1vh;
+  background-color: #fff;
+  position: absolute;
+  right: 7vw;
+  bottom: -7vh;
+  -webkit-animation: 9s linear 1s infinite bubble3;
+          animation: 9s linear 1s infinite bubble3;
+}
+#root > div:nth-child(4) {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(44, 66, 74, 0.5);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  position: absolute;
+  z-index: 2;
+}
+#root > div:nth-child(5) {
+  width: 95%;
+  height: 100%;
+  background-image: url(../SVG/day-twinkle.svg);
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 1;
+  -webkit-animation: 2s linear 1s infinite alternate updown;
+          animation: 2s linear 1s infinite alternate updown;
+}
+#root > div:last-child {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../SVG/road.svg);
+  position: absolute;
+  z-index: 0;
+  background-position: 86% 100%;
+  background-repeat: no-repeat;
+  background-size: auto 200%;
+}/*# sourceMappingURL=02-style.css.map */
