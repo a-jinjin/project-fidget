@@ -1,0 +1,133 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(#d1ddec, #f5f0dd);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+#root > div:first-child {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  width: 80vw;
+  height: 5vh;
+  position: fixed;
+  z-index: 1;
+  top: 10vh;
+}
+#root > div:first-child > div {
+  width: 5vh;
+  height: 5vh;
+  border-radius: 3vh;
+  background-color: #f5f0dd;
+  box-shadow: 0 4px 4px rgba(44, 66, 74, 0.5);
+}
+#root > div:first-child > div:nth-child(1) {
+  background-color: #1FC9C8;
+}
+#root > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+  height: 26vh;
+  background-color: #fff;
+  box-shadow: 4px 4px 7px rgba(44, 66, 74, 0.5);
+  border-radius: 2vh;
+  position: absolute;
+  z-index: 1;
+  top: 20vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 40vw;
+  height: 10vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 17vw;
+  height: 10vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(1) {
+  width: 7vh;
+  height: 7vh;
+  border-radius: 4vh;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div > p:last-child {
+  font-size: 14px;
+  color: #665673;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+  background-color: #1FC9C8;
+}
+#root > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+  background-color: #f5f0dd;
+}
+#root > div:nth-child(2) > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 60vw;
+  height: 5vh;
+  border-radius: 5vh;
+  margin-top: 2vh;
+  background-color: #C9F3F2;
+  color: #35B0B0;
+  font-weight: bold;
+  font-size: 18px;
+}
+#root > div:nth-child(3) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 80vw;
+  height: 9vh;
+  position: absolute;
+  top: 45%;
+  z-index: 2;
+}
+#root > div:nth-child(3) > div:nth-child(1) {
+  width: 9vh;
+  height: 9vh;
+  border-radius: 5vh;
+  box-shadow: 0 0 1vh #fff;
+  background-color: #35B0B0;
+  position: absolute;
+}
+#root > div:nth-child(3) > div:nth-child(2) {
+  width: 15vh;
+  height: 15vh;
+  background-image: url(../SVG/rose-01.svg);
+  background-repeat: no-repeat;
+  position: absolute;
+  right: -20vw;
+}
+#root > div:last-child {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../SVG/road.svg);
+  position: absolute;
+  z-index: 0;
+  background-position: 79% 10%;
+  background-repeat: no-repeat;
+  background-size: auto 150%;
+}/*# sourceMappingURL=01-style.css.map */

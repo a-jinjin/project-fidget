@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01-fidget-click</title>
+  <link rel="stylesheet" href="./CSS/01-style.css">
+</head>
+<body>
+  <div id="root">
+
+    <!-- 상단 설정버튼 -->
+    <div>
+      <div id="setBtn"></div>
+      <div id="exitBtn"></div>
+    </div>
+    <!-- 설정버튼 누르면 나올 설정상자 -->
+    <div id="settingBox">
+      <div>
+        <div>
+          <div></div>
+          <p>음량조절</p>
+        </div>
+        <div>
+          <div></div>
+          <p>밝기모드</p>
+        </div>
+      </div>
+      <div><p>종료하기</p></div>
+    </div>
+    <!-- user/rose -->
+    <div>
+      <div id="user"></div>
+      <div id="rose"></div>
+    </div>
+    <!-- 설정버튼 누르면 나올 전체박스(어둡게 만들어줄것) -->
+    <div></div>
+    <!-- 배경이미지 둘 공간 -->
+    <div id="bgImg"></div>
+
+  </div>
+
+
+  <script>
+    const setBtn = document.getElementById('setBtn');
+    const setExit = document.getElementById('exitBtn');
+    const settingBox = document.getElementById('settingBox');
+    
+    console.log(setBtn);
+    console.log(setExit);
+    console.dir(settingBox);
+
+    settingBox.style.display = 'none';
+    setExit.style.display = 'none';
+
+    setBtn.addEventListener('click', function(){
+      setExit.style.display = '';
+      setBtn.style.display = 'none';
+      settingBox.style.display = '';
+    });
+
+    setExit.addEventListener('click', function(){
+      setExit.style.display = 'none';
+      setBtn.style.display = '';
+      settingBox.style.display = 'none';
+    });
+
+    const userI = document.getElementById('user');
+    const rose = document.getElementById('rose');
+
+    rose.style.backgroundImage = 'url("../SVG/rose-02.svg")';
+    rose.style.opacity = 1;
+
+    
+    let count = 0;
+    // 클릭횟수 알아보기 위한 변수
+
+    userI.addEventListener('click', function(){
+      if(rose.style.backgroundImage === 'url("../SVG/rose-02.svg")'){
+        rose.style.backgroundImage = 'url("../SVG/rose-01.svg")';
+        // console.log(rose.style.backgroundImage);
+      }else{
+        rose.style.backgroundImage = 'url("../SVG/rose-02.svg")';
+        // console.log(rose.style.backgroundImage);
+      }
+      count++
+      console.log(count);
+
+      // 10번 클릭하면?
+      if (count > 10) {
+        rose.style.backgroundImage = 'url("../SVG/rose-03.svg")';
+        rose.style.opacity = rose.style.opacity-0.1;
+      }
+    });
+
+  </script>
+</body>
+</html>
