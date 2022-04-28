@@ -86,7 +86,7 @@
     const bgImg = document.getElementById('bgImg');
     // console.log(bgImg);
 
-    let imgX = 50;
+    let imgX = 43;
     let imgY = 100;
     // 배경이미지의 기본 position 값을 변수로 지정
 
@@ -94,16 +94,21 @@
     btnTop.addEventListener('click', function(){
       // bgImg.style.top = '30px';
       console.dir(bgImg.style);
-      bgImg.style.backgroundPosition = `${imgX}% ${imgY-5}%`;
-      imgY = imgY-5;
+      bgImg.style.backgroundPosition = `${imgX}% ${imgY-4.9}%`;
+      imgY = imgY-4.9;
+      console.log(imgY)
+
+      if(imgY <= 0){
+        alert('더이상 움직일 수 없습니다!');
+      }
     });
 
     // 왼쪽으로 가기 버튼
     btnLeft.addEventListener('click', function(){
       // bgImg.style.top = '30px';
       console.dir(bgImg.style);
-      bgImg.style.backgroundPosition = `${imgX-5}% ${imgY}%`;
-      imgX = imgX-5;
+      bgImg.style.backgroundPosition = `${imgX-6.5}% ${imgY}%`;
+      imgX = imgX-6.5;
       // console.log(imgX);
       
       if(imgX <= 0){
@@ -115,8 +120,8 @@
     btnRight.addEventListener('click', function(){
       // bgImg.style.top = '30px';
       console.dir(bgImg.style);
-      bgImg.style.backgroundPosition = `${imgX+5}% ${imgY}%`;
-      imgX = imgX+5;
+      bgImg.style.backgroundPosition = `${imgX+6.5}% ${imgY}%`;
+      imgX = imgX+6.5;
       console.log(imgX)
       if(imgX >= 100){
         alert('더이상 움직일 수 없습니다!');
