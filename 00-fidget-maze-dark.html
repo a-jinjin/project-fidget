@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>00-fidget-maze</title>
+  <link rel="stylesheet" href="./CSS/00-style.css">
+</head>
+<body>
+  <div id="root">
+
+    <!-- 상단 설정버튼 -->
+    <div>
+      <div id="setBtn"></div>
+      <div id="exitBtn"></div>
+    </div>
+    <!-- 설정버튼 누르면 나올 설정상자 -->
+    <div id="settingBox">
+      <div>
+        <div>
+          <div id="soundMode"></div>
+          <p>음량조절</p>
+        </div>
+        <div>
+          <div id="lightMode"></div>
+          <p>밝기모드</p>
+        </div>
+      </div>
+      <div><p>종료하기</p></div>
+    </div>
+    <!-- 방향키 놓을 공간 -->
+    <div>
+      <div id="userIcon"></div>
+      <div id="btnTop"></div>
+      <div id="btnLeft"></div>
+      <div id="btnRight"></div>
+    </div>
+    <!-- 설정버튼 누르면 나올 전체박스(어둡게 만들어줄것) -->
+    <div id="bgBlack"></div>
+    <!-- 트윙클트윙클 -->
+    <div></div>
+    <!-- 배경이미지 둘 공간 -->
+    <div id="bgImg"></div>
+
+  </div>
+
+
+  <script>
+    const root = document.getElementById('root');
+    const setBtn = document.getElementById('setBtn');
+    const setExit = document.getElementById('exitBtn');
+    const settingBox = document.getElementById('settingBox');
+    const bgBlack = document.getElementById('bgBlack');
+    
+    // console.log(setBtn);
+    // console.log(setExit);
+    // console.dir(settingBox);
+
+    // 설정박스 토글
+    settingBox.style.display = 'none';
+    setExit.style.display = 'none';
+    bgBlack.style.display = 'none';
+
+    
+    setBtn.addEventListener('click', function(){
+      setExit.style.display = '';
+      setBtn.style.display = 'none';
+      settingBox.style.display = '';
+      bgBlack.style.display = '';
+    });
+    
+    setExit.addEventListener('click', function(){
+      setExit.style.display = 'none';
+      setBtn.style.display = '';
+      settingBox.style.display = 'none';
+      bgBlack.style.display = 'none';
+    });
+    
+    
+    // 방향키
+    const btnTop = document.getElementById('btnTop');
+    // console.log(btnTop);
+    const btnLeft = document.getElementById('btnLeft');
+    const btnRight = document.getElementById('btnRight');
+    const userIcon = document.getElementById('userIcon');
+    
+    // 움직일 배경이미지
+    const bgImg = document.getElementById('bgImg');
+    // console.log(bgImg);
+    
+    let imgX = 43;
+    let imgY = 100;
+    // 배경이미지의 기본 position 값을 변수로 지정
+    
+    // 위로 가기 버튼
+    btnTop.addEventListener('click', function(){
+      // console.dir(bgImg.style);
+      bgImg.style.backgroundPosition = `${imgX}% ${imgY-4.9}%`;
+      imgY = imgY-4.9;
+      // console.log(imgY)
+      
+      if(imgY <= 0){
+        alert('더이상 움직일 수 없습니다!');
+      }
+    });
+
+    // 왼쪽으로 가기 버튼
+    btnLeft.addEventListener('click', function(){
+      // bgImg.style.top = '30px';
+      // console.dir(bgImg.style);
+      bgImg.style.backgroundPosition = `${imgX-6.5}% ${imgY}%`;
+      imgX = imgX-6.5;
+      // console.log(imgX);
+      
+      if(imgX <= 0){
+        alert('더이상 움직일 수 없습니다!');
+      } // 왼쪽 끝으로 이동하면 경고창을 띄워달라
+    });
+    
+    // 오른쪽으로 가기 버튼
+    btnRight.addEventListener('click', function(){
+      // bgImg.style.top = '30px';
+      // console.dir(bgImg.style);
+      bgImg.style.backgroundPosition = `${imgX+6.5}% ${imgY}%`;
+      imgX = imgX+6.5;
+      // console.log(imgX)
+      if(imgX >= 100){
+        alert('더이상 움직일 수 없습니다!');
+      } // 오른쪽 끝으로 이동하면 경고창을 띄워달라
+    });
+    
+    
+    //라이트모드 버튼
+    const lightMode = document.getElementById('lightMode');
+    const soundMode = document.getElementById('soundMode');
+    // console.dir(settingBox.children[0].children[0].children[1]);
+    const soundModeTxt = settingBox.children[0].children[0].children[1];
+    const lightModeTxt = settingBox.children[0].children[1].children[1];
+    const appExit = settingBox.children[1];
+    const appExitText = settingBox.children[1].children[0];
+    
+    let nightVioletLight = 'rgb(142, 116, 197)';
+    let nightVioletDark = 'rgb(71, 46, 114)';
+    let nightLemon = 'rgb(130, 126, 111)';
+    let nightSky = 'rgb(70, 87, 111)';
+    let nightText = 'rgb(207, 203, 186)';
+    let dayBgLemon = 'rgb(245, 240, 221)';
+    let dayBgSky = 'rgb(209, 221, 236)';
+    let dayMint = 'rgb(31, 201, 200)';
+    let dayMintDark = 'rgb(53, 176, 176)';
+    let dayMintLight = 'rgb(201, 243, 242)';
+    let dayShadow = 'rgba(44, 66, 74, 0.5)';
+    let dayText = 'rgb(102, 86, 115)';
+
+    
+    soundMode.style.backgroundColor = dayBgLemon;
+    soundMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
+    lightMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+
+
+    lightMode.addEventListener('click', function(){
+      // console.log('클릭작동함')
+      // console.dir(lightMode) ==> rgb값으로 들어옴. 색상변수는 rgb로 선언하자.
+      
+      // day에서 최초 클릭시 (==> 다크모드로 바꿔달라)
+      if(lightMode.style.backgroundColor === ""){
+        root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
+        bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';
+        settingBox.style.backgroundColor = 'rgb(21, 21, 22)';
+        lightMode.style.backgroundImage = 'url(../SVG/night-mode-on.svg)';
+        lightMode.style.backgroundColor = nightVioletDark;
+        lightModeTxt.style.color = nightText;
+        soundMode.style.backgroundImage = 'url(../SVG/night-sound-off.svg)';
+        soundMode.style.backgroundColor = dayBgSky;
+        soundModeTxt.style.color = nightText;
+        // console.log(lightMode.style.backgroundColor);
+        setExit.style.backgroundImage = 'url(../SVG/night-exitbtn.svg)';
+        setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
+        appExit.style.backgroundColor = nightVioletLight;
+        appExitText.style.color = nightVioletDark;
+        btnLeft.style.backgroundImage = 'url(../SVG/night-arrow-off-01.svg)';
+        btnTop.style.backgroundImage = 'url(../SVG/night-arrow-off-02.svg)';
+        btnRight.style.backgroundImage = 'url(../SVG/night-arrow-off-03.svg)';
+        
+
+      // 다크모드가 한 번 실행됐었다면 (==> 다시 라이트모드로 바꿔달라)
+      }else if(lightMode.style.backgroundColor === nightVioletDark){
+        root.style.background = '';
+        bgImg.style.backgroundImage = '';
+        settingBox.style.backgroundColor = '';
+        lightMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+        lightMode.style.backgroundColor = '';
+        lightModeTxt.style.color = '';
+        soundMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
+        soundMode.style.backgroundColor = dayBgLemon;
+        soundModeTxt.style.color = '';
+        setExit.style.backgroundImage = '';
+        setBtn.style.backgroundImage = '';
+        appExit.style.backgroundColor = '';
+        appExitText.style.color = '';
+        btnLeft.style.backgroundImage = '';
+        btnTop.style.backgroundImage = '';
+        btnRight.style.backgroundImage = '';
+      
+      // 다크모드도 라이트모드도 다 실행됐었다면 (==> 다시 다크모드로 바꿔달라)
+      }else {
+        root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
+        bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';
+        settingBox.style.backgroundColor = 'rgb(21, 21, 22)';
+        lightMode.style.backgroundImage = 'url(../SVG/night-mode-on.svg)';
+        lightMode.style.backgroundColor = nightVioletDark;
+        lightModeTxt.style.color = nightText;
+        soundMode.style.backgroundImage = 'url(../SVG/night-sound-off.svg)';
+        soundMode.style.backgroundColor = dayBgSky;
+        soundModeTxt.style.color = nightText;
+        setExit.style.backgroundImage = 'url(../SVG/night-exitbtn.svg)';
+        setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
+        appExit.style.backgroundColor = nightVioletLight;
+        appExitText.style.color = nightVioletDark;
+        btnLeft.style.backgroundImage = 'url(../SVG/night-arrow-off-01.svg)';
+        btnTop.style.backgroundImage = 'url(../SVG/night-arrow-off-02.svg)';
+        btnRight.style.backgroundImage = 'url(../SVG/night-arrow-off-03.svg)';
+      }
+    });
+    
+    
+    
+    </script>
+</body>
+</html>

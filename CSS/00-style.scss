@@ -22,8 +22,8 @@ $day-text: #665673;
 }
 
 @keyframes twinkle{
-  from { box-shadow: 0 0 0 #fff; }
-  to   { box-shadow: 0 0 2vh #fff;}
+  from { box-shadow: 0 0 0 $day-bg1 }
+  to   { box-shadow: 0 0 2vh $day-text;}
 }
 
 
@@ -198,9 +198,9 @@ $day-text: #665673;
     background-image: url(../SVG/road.svg);
     position: absolute;
     z-index: 0;
-    background-position: 50% 100%;
+    background-position: 43% 100%;
     background-repeat: no-repeat;
-    background-size: auto 150%;
+    background-size: auto 180%;
   }
 
 

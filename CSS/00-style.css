@@ -24,18 +24,18 @@
 }
 @-webkit-keyframes twinkle {
   from {
-    box-shadow: 0 0 0 #fff;
+    box-shadow: 0 0 0 #d1ddec;
   }
   to {
-    box-shadow: 0 0 2vh #fff;
+    box-shadow: 0 0 2vh #665673;
   }
 }
 @keyframes twinkle {
   from {
-    box-shadow: 0 0 0 #fff;
+    box-shadow: 0 0 0 #d1ddec;
   }
   to {
-    box-shadow: 0 0 2vh #fff;
+    box-shadow: 0 0 2vh #665673;
   }
 }
 #root {
@@ -205,7 +205,7 @@
   background-image: url(../SVG/road.svg);
   position: absolute;
   z-index: 0;
-  background-position: 50% 100%;
+  background-position: 43% 100%;
   background-repeat: no-repeat;
-  background-size: auto 150%;
+  background-size: auto 180%;
 }/*# sourceMappingURL=00-style.css.map */
