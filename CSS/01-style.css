@@ -5,20 +5,20 @@
 
 @-webkit-keyframes updown {
   from {
-    top: 10vh;
+    top: 16vh;
   }
   to {
-    top: 11vh;
+    top: 17vh;
     opacity: 0.3;
   }
 }
 
 @keyframes updown {
   from {
-    top: 10vh;
+    top: 16vh;
   }
   to {
-    top: 11vh;
+    top: 17vh;
     opacity: 0.3;
   }
 }
