@@ -32,14 +32,14 @@
     <!-- user -->
     <div>
       <div id="user"></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div id="bubble1"></div>
+      <div id="bubble2"></div>
+      <div id="bubble3"></div>
     </div>
     <!-- 설정버튼 누르면 나올 전체박스(어둡게 만들어줄것) -->
     <div id="bgBlack"></div>
     <!-- 트윙클트윙클 -->
-    <div></div>
+    <div id="twinkle"></div>
     <!-- 배경이미지 둘 공간 -->
     <div id="bgImg"></div>
 
@@ -85,6 +85,11 @@
     const lightModeTxt = settingBox.children[0].children[1].children[1];
     const appExit = settingBox.children[1];
     const appExitText = settingBox.children[1].children[0];
+    const userIcon = document.getElementById('user');
+    const bubbleOne = document.getElementById('bubble1');
+    const bubbleTwo = document.getElementById('bubble2');
+    const bubbleThree = document.getElementById('bubble3');
+    const twinkle = document.getElementById('twinkle');
     
     // 색상변수
     let nightVioletLight = 'rgb(142, 116, 197)';
@@ -94,6 +99,7 @@
     let nightText = 'rgb(207, 203, 186)';
     let dayBgLemon = 'rgb(245, 240, 221)';
     let dayBgSky = 'rgb(209, 221, 236)';
+    let nightBlack = 'rgb(21, 21, 22)';
 
     soundMode.style.backgroundColor = dayBgLemon;
     // soundmode버튼에 이상한 흰색 테두리가 생겨서 버튼 색상과 같은 색을 배경색으로 넣어줬다.
@@ -122,6 +128,10 @@
         setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
         appExit.style.backgroundColor = nightVioletLight;
         appExitText.style.color = nightVioletDark;
+        bubbleOne.style.backgroundColor = nightBlack;
+        bubbleTwo.style.backgroundColor = nightBlack;
+        bubbleThree.style.backgroundColor = nightBlack;
+        twinkle.style.backgroundImage = 'url(../SVG/night-twinkle.svg)';
 
       // 다크모드가 한 번 실행됐었다면 (==> 다시 라이트모드로 바꿔달라)
       }else if(lightMode.style.backgroundColor === nightVioletDark){
@@ -138,7 +148,11 @@
         setBtn.style.backgroundImage = '';
         appExit.style.backgroundColor = '';
         appExitText.style.color = '';
-      
+        bubbleOne.style.backgroundColor = '';
+        bubbleTwo.style.backgroundColor = '';
+        bubbleThree.style.backgroundColor = '';
+        twinkle.style.backgroundImage = '';
+
       // 다크모드도 라이트모드도 다 실행됐었던 상태에서 라이트모드라면 (==> 다시 다크모드로 바꿔달라)
       }else {
         root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
@@ -154,9 +168,23 @@
         setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
         appExit.style.backgroundColor = nightVioletLight;
         appExitText.style.color = nightVioletDark;
+        bubbleOne.style.backgroundColor = nightBlack;
+        bubbleTwo.style.backgroundColor = nightBlack;
+        bubbleThree.style.backgroundColor = nightBlack;
+        twinkle.style.backgroundImage = 'url(../SVG/night-twinkle.svg)';
       }
     });
 
+
+    // 타이머 알림
+    function timeToMove(){
+      alert('다른곳으로 이동합니다.');
+    }
+    setTimeout(timeToMove, 15000);
+    // ===> ~초 후에 체크되는 것 (1회성)
+    // setInterval(timeToMove, 10000);
+    // ===> 10000(10초)'마다' 체크되는 것
+    
   </script>
 </body>
 </html>

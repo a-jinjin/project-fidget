@@ -17,8 +17,8 @@ $day-text: #665673;
 }
 
 @keyframes updown{
-  from { top: 10vh; }
-  to   { top: 11vh; opacity: 0.3;}
+  from { top: 16vh; }
+  to   { top: 17vh; opacity: 0.3;}
 }
 
 @keyframes twinkle{
@@ -184,6 +184,7 @@ $day-text: #665673;
     z-index: 2;
   }
 
+  // 배경에 반짝반짝
   & > div:nth-child(5) {
     width: 95%; height: 100%;
     background-image: url(../SVG/day-twinkle.svg);
