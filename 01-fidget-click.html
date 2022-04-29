@@ -105,6 +105,12 @@
         rose.style.backgroundImage = 'url("../SVG/rose-03.svg")';
         rose.style.opacity = rose.style.opacity-0.1;
       }
+
+      // 21번째에는 다른페이지로 이동하게
+      if (count === 21) {
+        let link = '/02-fidget-bubble.html';
+        location.href=link;
+      }
     });
 
 
