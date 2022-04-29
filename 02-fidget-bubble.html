@@ -176,15 +176,24 @@
     });
 
 
-    // 타이머 알림
+    // 타이머 알림과 이동
+    let time = 20000;
+
+    // timeToMove라는 함수를 지정
     function timeToMove(){
-      alert('다른곳으로 이동합니다.');
+      alert(`${time/1000}초가 지났습니다. 다른곳으로 이동합니다.`);
+      // ~초가 지나면 알림을 띄워달라.
+      let link = '/01-fidget-click.html';
+      location.href=link;
+      // 그리고 link로 이동해라. (01-fidget-click페이지로 이동해라)
     }
-    setTimeout(timeToMove, 15000);
-    // ===> ~초 후에 체크되는 것 (1회성)
-    // setInterval(timeToMove, 10000);
-    // ===> 10000(10초)'마다' 체크되는 것
     
+    // setTimeout 실행(timeToMove함수 실행, time초 후에)
+    setTimeout(timeToMove, time);
+    // ===> ~초 후에 실행되는 스크립트 (1회성)
+    // setInterval(timeToMove, 10000);
+    // ===> 10000(10초)'마다' 실행되는 것
+
   </script>
 </body>
 </html>
