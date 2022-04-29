@@ -47,6 +47,8 @@
 
 
   <script>
+
+    // 세팅버튼 접었다 폈다 하는 스크립트
     const setBtn = document.getElementById('setBtn');
     const setExit = document.getElementById('exitBtn');
     const settingBox = document.getElementById('settingBox');
@@ -75,7 +77,7 @@
     });
 
 
-    //라이트모드 버튼
+    //이하 라이트모드 버튼을 위한 스크립트
     const lightMode = document.getElementById('lightMode');
     const soundMode = document.getElementById('soundMode');
     // console.dir(settingBox.children[0].children[0].children[1]);
@@ -84,6 +86,7 @@
     const appExit = settingBox.children[1];
     const appExitText = settingBox.children[1].children[0];
     
+    // 색상변수
     let nightVioletLight = 'rgb(142, 116, 197)';
     let nightVioletDark = 'rgb(71, 46, 114)';
     let nightLemon = 'rgb(130, 126, 111)';
@@ -91,23 +94,19 @@
     let nightText = 'rgb(207, 203, 186)';
     let dayBgLemon = 'rgb(245, 240, 221)';
     let dayBgSky = 'rgb(209, 221, 236)';
-    let dayMint = 'rgb(31, 201, 200)';
-    let dayMintDark = 'rgb(53, 176, 176)';
-    let dayMintLight = 'rgb(201, 243, 242)';
-    let dayShadow = 'rgba(44, 66, 74, 0.5)';
-    let dayText = 'rgb(102, 86, 115)';
 
-    
     soundMode.style.backgroundColor = dayBgLemon;
+    // soundmode버튼에 이상한 흰색 테두리가 생겨서 버튼 색상과 같은 색을 배경색으로 넣어줬다.
     soundMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
     lightMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
+    // soundMode버튼과 lightMode버튼 아이콘 (svg이미지) 넣어주기
 
-
+    // 라이트모드 버튼에 이벤트 추가
     lightMode.addEventListener('click', function(){
       // console.log('클릭작동함')
       // console.dir(lightMode) ==> rgb값으로 들어옴. 색상변수는 rgb로 선언하자.
       
-      // day에서 최초 클릭시 (==> 다크모드로 바꿔달라)
+      // 라이트모드에서 최초 클릭시 (==> 다크모드로 바꿔달라)
       if(lightMode.style.backgroundColor === ""){
         root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
         bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';
@@ -140,7 +139,7 @@
         appExit.style.backgroundColor = '';
         appExitText.style.color = '';
       
-      // 다크모드도 라이트모드도 다 실행됐었다면 (==> 다시 다크모드로 바꿔달라)
+      // 다크모드도 라이트모드도 다 실행됐었던 상태에서 라이트모드라면 (==> 다시 다크모드로 바꿔달라)
       }else {
         root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
         bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';

@@ -45,6 +45,7 @@
 
 
   <script>
+    // 세팅창 접었다폈다 하는 스크립트
     const setBtn = document.getElementById('setBtn');
     const setExit = document.getElementById('exitBtn');
     const settingBox = document.getElementById('settingBox');
@@ -84,10 +85,14 @@
     let count = 0;
     // 클릭횟수 알아보기 위한 변수
 
+    // userIcon에 이벤트 추가
     userI.addEventListener('click', function(){
+      // rose에 배경이미지로 rose-02가 들어있으면 rose-01로 바꿔달라
       if(rose.style.backgroundImage === 'url("../SVG/rose-02.svg")'){
         rose.style.backgroundImage = 'url("../SVG/rose-01.svg")';
         // console.log(rose.style.backgroundImage);
+
+      // 배경이미지가 rose-02가 아니라면 (==rose-01이라면) rose-02로 바꿔달라
       }else{
         rose.style.backgroundImage = 'url("../SVG/rose-02.svg")';
         // console.log(rose.style.backgroundImage);
@@ -95,7 +100,7 @@
       count++
       // console.log(count);
 
-      // 10번 클릭하면?
+      // 10번 클릭하면? ==> rose-03으로 바꿔주고 클릭할때마다 투명도를 0.1씩 줄여달라
       if (count > 10) {
         rose.style.backgroundImage = 'url("../SVG/rose-03.svg")';
         rose.style.opacity = rose.style.opacity-0.1;
@@ -112,6 +117,7 @@
     const appExit = settingBox.children[1];
     const appExitText = settingBox.children[1].children[0];
     
+    // 색상변수
     let nightVioletLight = 'rgb(142, 116, 197)';
     let nightVioletDark = 'rgb(71, 46, 114)';
     let nightLemon = 'rgb(130, 126, 111)';
@@ -119,18 +125,13 @@
     let nightText = 'rgb(207, 203, 186)';
     let dayBgLemon = 'rgb(245, 240, 221)';
     let dayBgSky = 'rgb(209, 221, 236)';
-    let dayMint = 'rgb(31, 201, 200)';
-    let dayMintDark = 'rgb(53, 176, 176)';
-    let dayMintLight = 'rgb(201, 243, 242)';
-    let dayShadow = 'rgba(44, 66, 74, 0.5)';
-    let dayText = 'rgb(102, 86, 115)';
 
-    
+    // 사운드와 라이트모드 버튼에 아이콘 넣음(svg)
     soundMode.style.backgroundColor = dayBgLemon;
     soundMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
     lightMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
 
-
+    // 라이트모드 버튼에 이벤트 추가
     lightMode.addEventListener('click', function(){
       // console.log('클릭작동함')
       // console.dir(lightMode) ==> rgb값으로 들어옴. 색상변수는 rgb로 선언하자.
