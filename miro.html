@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #root {
+      width: 260px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    const root = document.getElementById('root');
+    // 미로 모양 (5*5)
+    let maze = [
+      [0, 1, 1, 1, 1],
+      [0, 1, 1, 0, 1],
+      [0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 1],
+      [1, 0, 0, 0, 0]
+    ]
+    // 0은 뚫린 길, 1은 막힌 길
+
+    let mazeNumber = `[${maze.join()}]`;
+    console.log(mazeNumber);
+
+    // 좌표값을 위한 변수 : 가로 = x, 세로 = y
+    let mazeX = maze[0].length;
+    let mazeY = maze.lenght;
+
+    // 각각 50px * 50px, 정사각형 모양의 div로 만들고싶다.
+    
+    for(let y = 0; y<5; y++) {
+      for(let x = 0; x<5; x++) {
+        const box = document.createElement('div');
+        box.style.width = `50px`;
+        box.style.height = `50px`;
+        box.style.border = `1px solid black`;
+        box.id = `(${x}, ${y})`;
+        root.appendChild(box);
+
+        
+      }
+    }
+
+  </script>
+</body>
+</html>
