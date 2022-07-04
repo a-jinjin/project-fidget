@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    *{margin: 0; padding: 0;}
+    #root {
+      width: 100vw; height: 100vh;
+      background-color: #ccc;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    #root > header {
+      width: 80vw; height: 10vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 20vh;
+      left: 10vw;
+    }
+    #root > header > button {
+      width: 8vh; height: 8vh;
+    }
+    #root > section {
+      width: 100vw; height: 100vh;
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root">
+    <header>
+      <button id="top">상</button>
+      <button id="bottom">하</button>
+      <button id="left">좌</button>
+      <button id="right">우</button>
+    </header>
+    <section id="(0,0)">section 1</section>
+    <section id="(1,0)">section 2</section>
+    <section id="(0,1)">section 3</section>
+    <section id="(1,1)">section 4</section>
+  </div>
+
+
+  <script>
+    
+
+
+  </script>
+</body>
+</html>

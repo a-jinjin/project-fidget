@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dark</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    const root = document.getElementById('root');
+    root.style.display = 'flex';
+    const btnSound = document.createElement('div');
+    btnSound.style.width = 100+'px';
+    btnSound.style.height = 100+'px';
+    btnSound.style.backgroundColor = '#999';
+    btnSound.style.margin = '10px';
+    root.appendChild(btnSound);
+    const btnMode = document.createElement('div');
+    btnMode.style.width = 100+'px';
+    btnMode.style.height = 100+'px';
+    btnMode.style.backgroundColor = '#ccc';
+    btnMode.style.margin = '10px';
+    root.appendChild(btnMode);
+
+    // root styling
+    root.style.backgroundColor = '#fff';
+    root.style.width = `100vw`;
+    root.style.height = `100vh`;
+
+    let bgChange = false;
+    let soundChange = false;
+    // button event
+    btnMode.addEventListener('click', () => {
+      // dark mode
+      if(bgChange === false) {
+        root.style.backgroundColor = '#333';
+        btnMode.style.backgroundColor = '';
+        btnMode.style.border = '3px solid #ccc';
+        bgChange = true;
+
+      }else{
+        root.style.backgroundColor = '#fff';
+        btnMode.style.backgroundColor = '#ccc';
+        btnMode.style.border = '';
+        btnSound.style.backgroundColor = '#999';
+        btnSound.style.border = '';
+        bgChange = false;
+      }
+    });
+
+
+    btnSound.addEventListener('click', () => {
+      // sound on (default)
+      if(soundChange === false){
+      btnSound.style.backgroundColor = '#999';
+      btnSound.style.border = '3px solid #999';
+      soundChange = true;
+      } else {
+      // sound off
+      btnSound.style.backgroundColor = '#999';
+      btnSound.style.border = '';
+      soundChange = false;
+      }
+    });
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {margin: 0; padding: 0;}
+    #root {
+      width: 100vw; height: 100vh;
+      background-color: #ccc;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #root > div:nth-child(1) > button {
+      width: 50px; height: 50px;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div>
+      <button id="btn-top">상</button>
+      <button id="btn-bottom">하</button>
+      <button id="btn-left">좌</button>
+      <button id="btn-right">우</button>
+    </div>
+    <div id="maze"></div>
+  </div>
+
+
+  <script>
+    const maze = document.getElementById('maze');
+    maze.style.width = '250px'
+    maze.style.display = 'grid';
+    maze.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr'
+    maze.style.gap = 0;
+    maze.style.marginTop = '5vh';
+    const map = [
+      [1, 1, 0, 1, 1],
+      [1, 0, 0, 1, 0],
+      [1, 1, 0, 0, 0],
+      [1, 0, 0, 1, 1],
+      [0, 0, 1, 1, 1]
+    ];
+
+    // console.log(map[0][0]);
+    // map[y좌표][x좌표]
+
+    for(let yValue = 0; yValue < map.length; yValue++){
+      
+      for(let xValue = 0; xValue < map[0].length; xValue++) {
+        // console.log(map[yValue][xValue]);
+        const test = document.createElement('div');
+        test.style.width = 7+'vh';
+        test.style.height = 7+'vh';
+        test.style.border = '1px solid';
+        test.id = `(${xValue},${yValue})`;
+        test.style.display = 'none';
+        // dataset으로 구분해 색칠하기위해 map배열의 값들을 dataset에 넣어줬다.
+        test.dataset.block = map[yValue][xValue];
+        // console.log(test.dataset)
+        maze.appendChild(test);
+      }
+    }
+
+
+    // 요소 보여지게 해주는 함수
+    function elemColor(x, y) {
+      let elem = document.getElementById(`(${x},${y})`);
+      elem.style.display = 'block';
+    };
+
+    // start point
+    let startX = 0;
+    let startY = 4;
+    elemColor(startX, startY);
+
+    // 버튼 식별
+    const btnTop = document.getElementById('btn-top');
+    const btnBottom = document.getElementById('btn-bottom');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+
+    // 버튼 이벤트
+    btnRight.addEventListener('click', () => {
+      let element = document.getElementById(`(${startX},${startY})`);
+      element.style.display = 'none';
+      startX = startX+1;
+
+      // dataset이 0일때만 보여지도록
+      if(startX <= 4 && element.dataset.block === '0') {
+        elemColor(startX, startY, 'blue');
+        console.log(`${startX},${startY}`);
+      
+      // dataset이 0이 아니라면(1이라면) 알림 + 좌표 원상복구
+      } else {
+        alert('움직일 수 없습니다');
+        startX = startX-1;
+        console.log(`${startX},${startY}`);
+      }
+
+      
+    });
+
+    btnLeft.addEventListener('click', () => {
+      let element = document.getElementById(`(${startX},${startY})`);
+      element.style.display = 'none';
+      startX = startX-1;
+
+      // dataset이 0일때만 배경색을 blue로 변경
+      if(startX >= 0 && element.dataset.block === '0') {
+        elemColor(startX, startY, 'blue');
+        console.log(`${startX},${startY}`);
+      
+      } else if (startX === 4 && startY === 1) {
+        alert('도착');
+        
+      // dataset이 0이 아니라면(1이라면) 알림 + 좌표 원상복구
+      } else {
+        alert('움직일 수 없습니다');
+        startX = startX+1;
+        console.log(`${startX},${startY}`);
+      }
+
+    });
+
+    btnTop.addEventListener('click', () => {
+      startY = startY-1;
+      let element = document.getElementById(`(${startX},${startY})`);
+
+      // dataset이 0일때만 배경색을 blue로 변경
+      if(startY >= 0 && element.dataset.block === '0') {
+        elemColor(startX, startY, 'blue');
+        console.log(`${startX},${startY}`);
+
+        // 도착했다면?
+        if (startX === 4 && startY === 1) {
+          alert('도착');
+          
+          // 원상복구!
+          for(let i = 0; i < road.length; i++) {
+            if(road[i].dataset.block === '0') {
+              road[i].style.backgroundColor = '#fff'
+            } else {
+              road[i].style.backgroundColor = '#333'
+            }
+          };
+          startX = 0;
+          startY = 4;
+          elemColor(startX, startY);
+          // console.log(`${startX},${startY}`)
+        }
+
+      // dataset이 0이 아니라면(1이라면) 알림 + 좌표 원상복구
+      } else {
+        alert('움직일 수 없습니다');
+        startY = startY+1;
+        console.log(`${startX},${startY}`);
+      }
+    });
+
+    btnBottom.addEventListener('click', () => {
+      startY = startY+1;
+      let element = document.getElementById(`(${startX},${startY})`);
+
+      // dataset이 0일때만 배경색을 blue로 변경
+      if(startY <= 4 && element.dataset.block === '0') {
+        elemColor(startX, startY, 'blue');
+        console.log(`${startX},${startY}`);
+
+      } else if (startX === 4 && startY === 1) {
+        alert('도착');
+        
+      // dataset이 0이 아니라면(1이라면) 알림 + 좌표 원상복구
+      } else {
+        alert('움직일 수 없습니다');
+        startY = startY-1;
+        console.log(`${startX},${startY}`);
+      }
+    });
+
+  </script>
+</body>
+</html>

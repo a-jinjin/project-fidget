@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+
+    #root {
+      width: 100vw; height: 100vh;
+      background-color: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #setting-box {
+      width: 300px; height: 300px;
+      border: 1px solid;
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .button {
+      width: 100px; height: 100px;
+      background-color: #333;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div id="setting-button" class="button"></div>
+    <div id="setting-box">
+      <div id="sound-button" class="button"></div>
+      <div id="mode-button" class="button"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const root = document.getElementById('root');
+    const btnSetting = document.getElementById('setting-button');
+    const settingBox = document.getElementById('setting-box');
+    const btnMode = document.getElementById('mode-button');
+    const btnSound = document.getElementById('sound-button');
+
+    btnSetting.style.position = 'fixed';
+    btnSetting.style.top = 200+'px';
+    settingBox.style.display = 'none';
+
+    let settingValue = false;
+    btnSetting.addEventListener('click', () => {
+      if(settingValue === false) {
+        settingBox.style.display = 'block';
+        settingValue = true;
+      } else {
+        settingBox.style.display = 'none';
+        settingValue = false;
+      }
+    });
+
+    let modeValue = false;
+    btnMode.addEventListener('click', () => {
+      if(modeValue === false) {
+        root.style.backgroundColor = '#333';
+        btnSetting.style.backgroundColor = '#ccc';
+        settingBox.style.border = '1px solid #ccc';
+        btnMode.style.backgroundColor = '#ccc';
+        btnSound.style.backgroundColor = '#ccc';
+        modeValue = true;
+      } else {
+        root.style.backgroundColor = '#ccc';
+        btnSetting.style.backgroundColor = '#333';
+        settingBox.style.border = '1px solid #333';
+        modeValue = false;
+        btnMode.style.backgroundColor = '#333';
+        btnSound.style.backgroundColor = '#333';
+      }
+    });
+
+  </script>
+</body>
+</html>

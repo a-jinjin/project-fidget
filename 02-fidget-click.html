@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>00-fidget-maze</title>
-  <link rel="stylesheet" href="./CSS/00-style.css">
+  <title>01-fidget-click</title>
+  <link rel="stylesheet" href="./CSS/01-style.css">
 </head>
 <body>
   <div id="root">
@@ -29,12 +29,10 @@
       </div>
       <div><p>종료하기</p></div>
     </div>
-    <!-- 방향키 놓을 공간 -->
+    <!-- user/rose -->
     <div>
-      <div id="userIcon"></div>
-      <div id="btnTop"></div>
-      <div id="btnLeft"></div>
-      <div id="btnRight"></div>
+      <div id="user"></div>
+      <div id="rose"></div>
     </div>
     <!-- 설정버튼 누르면 나올 전체박스(어둡게 만들어줄것) -->
     <div id="bgBlack"></div>
@@ -47,17 +45,19 @@
 
 
   <script>
-    const root = document.getElementById('root');
+    // 세팅창 접었다폈다 하는 스크립트
     const setBtn = document.getElementById('setBtn');
     const setExit = document.getElementById('exitBtn');
     const settingBox = document.getElementById('settingBox');
-    const bgBlack = document.getElementById('bgBlack');
+    function randomNumber(min=1, max=3) {
+      let ranNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      return ranNumber;
+    };
     
-    // console.log(setBtn);
-    // console.log(setExit);
-    // console.dir(settingBox);
+    console.log(setBtn);
+    console.log(setExit);
+    console.dir(settingBox);
 
-    // 설정박스 토글
     settingBox.style.display = 'none';
     setExit.style.display = 'none';
     bgBlack.style.display = 'none';
@@ -76,61 +76,55 @@
       settingBox.style.display = 'none';
       bgBlack.style.display = 'none';
     });
+
+
+    // userIcon을 클릭하면 장미가 변화하는 이벤트
+    const userI = document.getElementById('user');
+    const rose = document.getElementById('rose');
+
+    rose.style.backgroundImage = 'url("../SVG/rose-02.svg")';
+    rose.style.opacity = 1;
+
     
-    
-    // 방향키
-    const btnTop = document.getElementById('btnTop');
-    // console.log(btnTop);
-    const btnLeft = document.getElementById('btnLeft');
-    const btnRight = document.getElementById('btnRight');
-    const userIcon = document.getElementById('userIcon');
-    
-    // 움직일 배경이미지
-    const bgImg = document.getElementById('bgImg');
-    // console.log(bgImg);
-    
-    let imgX = 43;
-    let imgY = 100;
-    // 배경이미지의 기본 position 값을 변수로 지정
-    
-    // 위로 가기 버튼
-    btnTop.addEventListener('click', function(){
-      // console.dir(bgImg.style);
-      bgImg.style.backgroundPosition = `${imgX}% ${imgY-4.9}%`;
-      imgY = imgY-4.9;
-      // console.log(imgY)
-      
-      if(imgY <= 0){
-        alert('더이상 움직일 수 없습니다!');
+    let count = 0;
+    // 클릭횟수 알아보기 위한 변수
+
+    // userIcon에 이벤트 추가
+    userI.addEventListener('click', function(){
+      // rose에 배경이미지로 rose-02가 들어있으면 rose-01로 바꿔달라
+      if(rose.style.backgroundImage === 'url("../SVG/rose-02.svg")'){
+        rose.style.backgroundImage = 'url("../SVG/rose-01.svg")';
+        // console.log(rose.style.backgroundImage);
+
+      // 배경이미지가 rose-02가 아니라면 (==rose-01이라면) rose-02로 바꿔달라
+      }else{
+        rose.style.backgroundImage = 'url("../SVG/rose-02.svg")';
+        // console.log(rose.style.backgroundImage);
+      }
+      count++
+      // console.log(count);
+
+      // 10번 클릭하면? ==> rose-03으로 바꿔주고 클릭할때마다 투명도를 0.1씩 줄여달라
+      if (count > 10) {
+        rose.style.backgroundImage = 'url("../SVG/rose-03.svg")';
+        rose.style.opacity = rose.style.opacity-0.1;
+      }
+
+      // 21번째에는 다른페이지로 이동하게
+      if (count === 21) {
+        let randomPage = randomNumber(1, 3);
+
+        if(randomPage === 1) {
+          location.href = './01-fidget-maze.html';
+        }else if(randomPage === 2) {
+          location.href = './02-fidget-click.html';
+        }else{
+          location.href = './03-fidget-bubble.html';
+        }
       }
     });
 
-    // 왼쪽으로 가기 버튼
-    btnLeft.addEventListener('click', function(){
-      // bgImg.style.top = '30px';
-      // console.dir(bgImg.style);
-      bgImg.style.backgroundPosition = `${imgX-6.5}% ${imgY}%`;
-      imgX = imgX-6.5;
-      // console.log(imgX);
-      
-      if(imgX <= 0){
-        alert('더이상 움직일 수 없습니다!');
-      } // 왼쪽 끝으로 이동하면 경고창을 띄워달라
-    });
-    
-    // 오른쪽으로 가기 버튼
-    btnRight.addEventListener('click', function(){
-      // bgImg.style.top = '30px';
-      // console.dir(bgImg.style);
-      bgImg.style.backgroundPosition = `${imgX+6.5}% ${imgY}%`;
-      imgX = imgX+6.5;
-      // console.log(imgX)
-      if(imgX >= 100){
-        alert('더이상 움직일 수 없습니다!');
-      } // 오른쪽 끝으로 이동하면 경고창을 띄워달라
-    });
-    
-    
+
     //라이트모드 버튼
     const lightMode = document.getElementById('lightMode');
     const soundMode = document.getElementById('soundMode');
@@ -140,6 +134,7 @@
     const appExit = settingBox.children[1];
     const appExitText = settingBox.children[1].children[0];
     
+    // 색상변수
     let nightVioletLight = 'rgb(142, 116, 197)';
     let nightVioletDark = 'rgb(71, 46, 114)';
     let nightLemon = 'rgb(130, 126, 111)';
@@ -147,18 +142,13 @@
     let nightText = 'rgb(207, 203, 186)';
     let dayBgLemon = 'rgb(245, 240, 221)';
     let dayBgSky = 'rgb(209, 221, 236)';
-    let dayMint = 'rgb(31, 201, 200)';
-    let dayMintDark = 'rgb(53, 176, 176)';
-    let dayMintLight = 'rgb(201, 243, 242)';
-    let dayShadow = 'rgba(44, 66, 74, 0.5)';
-    let dayText = 'rgb(102, 86, 115)';
 
-    
+    // 사운드와 라이트모드 버튼에 아이콘 넣음(svg)
     soundMode.style.backgroundColor = dayBgLemon;
-    soundMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
-    lightMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+    soundMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+    lightMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
 
-
+    // 라이트모드 버튼에 이벤트 추가
     lightMode.addEventListener('click', function(){
       // console.log('클릭작동함')
       // console.dir(lightMode) ==> rgb값으로 들어옴. 색상변수는 rgb로 선언하자.
@@ -179,31 +169,24 @@
         setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
         appExit.style.backgroundColor = nightVioletLight;
         appExitText.style.color = nightVioletDark;
-        btnLeft.style.backgroundImage = 'url(../SVG/night-arrow-off-01.svg)';
-        btnTop.style.backgroundImage = 'url(../SVG/night-arrow-off-02.svg)';
-        btnRight.style.backgroundImage = 'url(../SVG/night-arrow-off-03.svg)';
-        
 
       // 다크모드가 한 번 실행됐었다면 (==> 다시 라이트모드로 바꿔달라)
       }else if(lightMode.style.backgroundColor === nightVioletDark){
         root.style.background = '';
         bgImg.style.backgroundImage = '';
         settingBox.style.backgroundColor = '';
-        lightMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
+        lightMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
         lightMode.style.backgroundColor = '';
         lightModeTxt.style.color = '';
-        soundMode.style.backgroundImage = 'url(../SVG/day-mode-on.svg)';
+        soundMode.style.backgroundImage = 'url(../SVG/day-sound-off.svg)';
         soundMode.style.backgroundColor = dayBgLemon;
         soundModeTxt.style.color = '';
         setExit.style.backgroundImage = '';
         setBtn.style.backgroundImage = '';
         appExit.style.backgroundColor = '';
         appExitText.style.color = '';
-        btnLeft.style.backgroundImage = '';
-        btnTop.style.backgroundImage = '';
-        btnRight.style.backgroundImage = '';
       
-      // 다크모드도 라이트모드도 다 실행됐었다면 (==> 다시 다크모드로 바꿔달라)
+      // 다크모드도 라이트모드도 다 실행됐었고 지금은 라이트모드다. (==> 다시 다크모드로 바꿔달라)
       }else {
         root.style.background = `linear-gradient(${nightSky}, ${nightLemon})`;
         bgImg.style.backgroundImage = 'url(../SVG/night-road.svg)';
@@ -218,14 +201,9 @@
         setBtn.style.backgroundImage = 'url(../SVG/night-settingbtn.svg)';
         appExit.style.backgroundColor = nightVioletLight;
         appExitText.style.color = nightVioletDark;
-        btnLeft.style.backgroundImage = 'url(../SVG/night-arrow-off-01.svg)';
-        btnTop.style.backgroundImage = 'url(../SVG/night-arrow-off-02.svg)';
-        btnRight.style.backgroundImage = 'url(../SVG/night-arrow-off-03.svg)';
       }
     });
-    
-    
-    
-    </script>
+
+  </script>
 </body>
 </html>
