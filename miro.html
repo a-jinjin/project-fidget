@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {margin: 0; padding: 0;}
+    #root {
+      width: 100vw; height: 100vh;
+      background-color: #ccc;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #root > div:nth-child(1) {
+      width: 100vw; height: 40vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      bottom: 7vh;
+    }
+    #root > div:nth-child(1) > button {
+      width: 5vh; height: 5vh;
+      border-radius: 3vh;
+      border: none;
+    }
+
+    #root > div:nth-child(1) > button:nth-child(5) {
+      width: 9vh; height: 9vh;
+      border-radius: 5vh;
+      border: none;
+      background-image: url(./SVG/user-icon.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 0 0 5px #fff;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div>
+      <button id="btn-top"></button>
+      <button id="btn-bottom"></button>
+      <button id="btn-left"></button>
+      <button id="btn-right"></button>
+      <button></button> <!-- user -->
+    </div>
+    <div id="maze"></div>
+  </div>
+
+
+  <script>
+    const root = document.getElementById('root');
+    const maze = document.getElementById('maze');
+    maze.style.width = '250px'
+    maze.style.display = 'grid';
+    maze.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr';
+    maze.style.gap = 0;
+
+    const map = [
+      [1, 1, 0, 1, 1],
+      [1, 0, 0, 1, 0],
+      [1, 1, 0, 0, 0],
+      [1, 0, 0, 1, 0],
+      [0, 0, 1, 1, 1]
+    ];
+
+    const miroImage = [
+      [ `url('')`,
+        `url('')`,
+        `url('./miro/2-0.png')`,
+        `url('')`,
+        `url('')` ],
+      [ `url('')`,
+        `url('./miro/1-1.png')`,
+        `url('./miro/2-1.png')`,
+        `url('')`,
+        `url('./miro/4-1.png')` ],
+      [ `url('')`,
+        `url('')`,
+        `url('./miro/2-2.png')`,
+        `url('./miro/3-2.png')`,
+        `url('./miro/4-2.png')` ],
+      [ `url('')`,
+        `url('./miro/1-3.png')`,
+        `url('./miro/2-3.png')`,
+        `url('')`,
+        `url('./miro/4-3.png')`],
+      [ `url('./miro/0-4.png')`,
+        `url('./miro/1-4.png')`,
+        `url('')`,
+        `url('')`,
+        `url('')`]
+    ];
+
+    // console.log(map[0][0]);
+    // map[y좌표][x좌표]
+
+    for(let yValue = 0; yValue < map.length; yValue++){
+      
+      for(let xValue = 0; xValue < map[0].length; xValue++) {
+        // console.log(map[yValue][xValue]);
+        const test = document.createElement('div');
+        test.dataset.block = map[yValue][xValue];
+        test.id = `(${xValue},${yValue})`;
+
+        test.style.width = 100+'vw';
+        test.style.height = 100+'vh';
+        test.style.backgroundImage = miroImage[yValue][xValue];
+        test.style.backgroundRepeat = 'no-repeat';
+        test.style.backgroundSize = 'cover';
+        test.style.backgroundPosition = 'center center';
+        test.style.display = 'none';
+
+        maze.appendChild(test);
+      }
+    }
+
+    const textbox = document.createElement('div');
+    textbox.style.width = '80vw';
+    textbox.style.height = '10vh';
+    textbox.style.background = 'linear-gradient(to right, white, white 10%, transparent)'
+    textbox.style.position = 'fixed';
+    textbox.style.top = '10vh';
+    textbox.style.left = '10vw';
+    textbox.style.zIndex = 3;
+    textbox.textContent = '방향키를 움직여 토끼굴을 찾아보세요.';
+    textbox.style.backgroundColor = '#fff';
+    root.appendChild(textbox);
+
+
+    // 요소 보여지게 해주는 함수
+    function elemOn(x, y) {
+      let elem = document.getElementById(`(${x},${y})`);
+      elem.style.display = 'block';
+    };
+    // 요소 안보이게 해주는 함수
+    function elemOff(x, y) {
+      let elem = document.getElementById(`(${x},${y})`);
+      elem.style.display = 'none';
+    };
+
+    // start point
+    let startX = 0;
+    let startY = 4;
+    elemOn(startX, startY);
+
+    // 버튼 식별
+    const btnTop = document.getElementById('btn-top');
+    const btnBottom = document.getElementById('btn-bottom');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+
+    // 버튼 위치 잡는 함수
+    function btnLocationLeft(button, value=2) {
+      button.style.left = value+'vh';
+    }function btnLocationRight(button, value=2) {
+      button.style.right = value+'vh';
+    }function btnLocationTop(button, value=2) {
+      button.style.top = value+'vh';
+    }function btnLocationBottom(button, value=2) {
+      button.style.bottom = value+'vh';
+    }
+    function btnLocation(button, img, location) {
+      location
+      button.style.position = 'absolute';
+      button.style.backgroundImage = `url('./SVG/day-arrow-off-${img}.svg')`;
+      button.style.boxShadow = '0 0 5px rgba(44, 66, 74, 0.5)';
+    }
+
+    btnLocation(btnTop, '02', btnLocationTop(btnTop, 3));
+    btnLocation(btnLeft, '01', btnLocationLeft(btnLeft, 5));
+    btnLocation(btnRight, '03', btnLocationRight(btnRight, 5));
+    btnLocation(btnBottom, '04', btnLocationBottom(btnBottom, 3));
+
+
+    btnRight.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startX = startX+1;
+      console.log(`${startX}, ${startY}`);
+      
+      if(startX > 4) {
+        alert('잘못된 위치');
+        startX = startX-1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+      console.log(nowElement.dataset.block);
+
+      if(nowElement.dataset.block === '0'){
+        console.log('데이터셋이 0입니다.');
+        elemOn(startX, startY);
+
+      }else{
+        alert('길이 막혔음');
+        startX = startX-1;
+        console.log(`${startX}, ${startY}`);
+        elemOn(startX, startY);
+      }
+    });
+
+    btnLeft.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startX = startX-1;
+      console.log(`${startX}, ${startY}`);
+      
+      if(startX < 0) {
+        alert('잘못된 위치');
+        startX = startX+1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+      console.log(nowElement.dataset.block);
+
+      if(startX >= 0 && nowElement.dataset.block === '0'){
+        console.log('데이터셋이 0입니다.');
+        elemOn(startX, startY);
+
+      } else {
+        alert('길이 막혔음');
+        startX = startX+1;
+        console.log(`${startX}, ${startY}`);
+        elemOn(startX, startY);
+      }
+    });
+
+    btnTop.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startY = startY-1;
+      console.log(`${startX}, ${startY}`);
+      
+      if(startY < 0) {
+        alert('잘못된 위치');
+        startY = startY+1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+      console.log(nowElement.dataset.block);
+
+      if(startY >= 0 && nowElement.dataset.block === '0'){
+        console.log('데이터셋이 0입니다.');
+        elemOn(startX, startY);
+
+      } else {
+        alert('길이 막혔음');
+        startY = startY+1;
+        console.log(`${startX}, ${startY}`);
+        elemOn(startX, startY);
+      }
+    });
+
+    btnBottom.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startY = startY+1;
+      console.log(`${startX}, ${startY}`);
+      
+      if(startY > 4) {
+        alert('잘못된 위치');
+        startY = startY-1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+      console.log(nowElement.dataset.block);
+
+      if(startY <= 4 && nowElement.dataset.block === '0'){
+        console.log('데이터셋이 0입니다.');
+        elemOn(startX, startY);
+
+      } else {
+        alert('길이 막혔음');
+        startY = startY-1;
+        console.log(`${startX}, ${startY}`);
+        elemOn(startX, startY);
+      }
+    });
+
+  </script>
+</body>
+</html>

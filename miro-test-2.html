@@ -13,10 +13,22 @@
       background-color: #ccc;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
+    #root > div:nth-child(1) {
+      width: 100vw; height: initial;
+      display: flex;
+      justify-content: center;
+      position: fixed;
+      top: 10vh;
+    }
     #root > div:nth-child(1) > button {
       width: 50px; height: 50px;
+      border-radius: 25px;
+      border: none;
+      background-color: #ccc;
+      margin: 1vh;
     }
 
   </style>
@@ -39,7 +51,7 @@
     maze.style.display = 'grid';
     maze.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr'
     maze.style.gap = 0;
-    maze.style.marginTop = '5vh';
+
     const map = [
       [1, 1, 0, 1, 1],
       [1, 0, 0, 1, 0],
@@ -56,11 +68,12 @@
       for(let xValue = 0; xValue < map[0].length; xValue++) {
         // console.log(map[yValue][xValue]);
         const test = document.createElement('div');
-        test.style.width = 7+'vh';
-        test.style.height = 7+'vh';
-        test.style.border = '1px solid';
+        test.style.width = 100+'vw';
+        test.style.height = 100+'vh';
+        test.style.backgroundColor = 'white'
         test.id = `(${xValue},${yValue})`;
         test.style.display = 'none';
+        test.textContent = `(${xValue},${yValue})`;
         // dataset으로 구분해 색칠하기위해 map배열의 값들을 dataset에 넣어줬다.
         test.dataset.block = map[yValue][xValue];
         // console.log(test.dataset)
@@ -117,9 +130,6 @@
         elemColor(startX, startY, 'blue');
         console.log(`${startX},${startY}`);
       
-      } else if (startX === 4 && startY === 1) {
-        alert('도착');
-        
       // dataset이 0이 아니라면(1이라면) 알림 + 좌표 원상복구
       } else {
         alert('움직일 수 없습니다');
@@ -130,8 +140,9 @@
     });
 
     btnTop.addEventListener('click', () => {
-      startY = startY-1;
       let element = document.getElementById(`(${startX},${startY})`);
+      element.style.display = 'none';
+      startY = startY-1;
 
       // dataset이 0일때만 배경색을 blue로 변경
       if(startY >= 0 && element.dataset.block === '0') {
@@ -141,19 +152,12 @@
         // 도착했다면?
         if (startX === 4 && startY === 1) {
           alert('도착');
-          
-          // 원상복구!
-          for(let i = 0; i < road.length; i++) {
-            if(road[i].dataset.block === '0') {
-              road[i].style.backgroundColor = '#fff'
-            } else {
-              road[i].style.backgroundColor = '#333'
-            }
-          };
-          startX = 0;
+          let element = document.getElementById(`(${startX},${startY})`);
+          element.style.display = 'none';
+          startX = 0; 
           startY = 4;
-          elemColor(startX, startY);
-          // console.log(`${startX},${startY}`)
+          elemColor(startX, startY, 'blue');
+          console.log(`${startX},${startY}`)
         }
 
       // dataset이 0이 아니라면(1이라면) 알림 + 좌표 원상복구
@@ -165,8 +169,9 @@
     });
 
     btnBottom.addEventListener('click', () => {
-      startY = startY+1;
       let element = document.getElementById(`(${startX},${startY})`);
+      element.style.display = 'none';
+      startY = startY+1;
 
       // dataset이 0일때만 배경색을 blue로 변경
       if(startY <= 4 && element.dataset.block === '0') {
