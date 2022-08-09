@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fidget Wonderland</title>
+
+  <style>
+    * {margin: 0; padding: 0;}
+    #root {
+      width: 100vw; height: 100vh;
+      background-color: #ccc;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #root > div:nth-child(1) {
+      width: 100vw; height: 35vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      bottom: 10vh;
+    }
+    #root > div:nth-child(1) > button {
+      width: 50px; height: 50px;
+      border-radius: 25px;
+      border: none;
+      background-color: #ccc;
+    }
+
+    #root > div:nth-child(1) > button:nth-child(5) {
+      width: 8vh; height: 8vh;
+      border-radius: 4vh;
+      border: none;
+      background-image: url('./SVG/user-icon.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div>
+      <button id="btn-top"></button>
+      <button id="btn-bottom"></button>
+      <button id="btn-left"></button>
+      <button id="btn-right"></button>
+      <button></button> <!-- user -->
+    </div>
+    <div id="maze"></div>
+  </div>
+
+
+  <script>
+    const maze = document.getElementById('maze');
+    maze.style.width = '250px'
+    maze.style.display = 'grid';
+    maze.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr';
+    maze.style.gap = 0;
+
+    const map = [
+      [1, 1, 0, 1, 1],
+      [1, 0, 0, 1, 0],
+      [1, 1, 0, 0, 0],
+      [1, 0, 0, 1, 0],
+      [0, 0, 1, 1, 1]
+    ];
+
+    const miroImage = [
+      [ `url('')`,
+        `url('')`,
+        `url('./miro/2-0.svg')`,
+        `url('')`,
+        `url('')` ],
+      [ `url('')`,
+        `url('./miro/1-1.svg')`,
+        `url('./miro/2-1.svg')`,
+        `url('')`,
+        `url('./miro/4-1.svg')` ],
+      [ `url('')`,
+        `url('')`,
+        `url('./miro/2-2.svg')`,
+        `url('./miro/3-2.svg')`,
+        `url('./miro/4-2.svg')` ],
+      [ `url('')`,
+        `url('./miro/1-3.svg')`,
+        `url('./miro/2-3.svg')`,
+        `url('')`,
+        `url('./miro/4-3.svg')`],
+      [ `url('./miro/0-4.svg')`,
+        `url('./miro/1-4.svg')`,
+        `url('')`,
+        `url('')`,
+        `url('')`]
+    ];
+
+    // console.log(map[0][0]);
+    // map[y좌표][x좌표]
+
+    for(let yValue = 0; yValue < map.length; yValue++){
+      
+      for(let xValue = 0; xValue < map[0].length; xValue++) {
+        const test = document.createElement('div');
+        // dataset으로 구분해 색칠하기위해 map배열의 값들을 dataset에 넣어줬다.
+        test.dataset.block = map[yValue][xValue];
+
+        // 스타일링
+        test.style.width = 100+'vw';
+        test.style.height = 100+'vh';
+        test.style.backgroundColor = 'white';
+        test.id = `(${xValue},${yValue})`;
+        test.style.display = 'none';
+        // 배경이미지
+        test.style.backgroundImage = miroImage[yValue][xValue];
+        test.style.backgroundRepeat = 'no-repeat';
+        test.style.backgroundSize = 'cover';
+        test.style.backgroundPosition = 'center center';
+        maze.appendChild(test);
+      }
+    }
+
+
+    // 요소 보여지게 해주는 함수
+    function elemOn(x, y) {
+      let elem = document.getElementById(`(${x},${y})`);
+      elem.style.display = 'block';
+    };
+    // 요소 안보이게 해주는 함수
+    function elemOff(x, y) {
+      let elem = document.getElementById(`(${x},${y})`);
+      elem.style.display = 'none';
+    };
+
+    // start point
+    let startX = 0;
+    let startY = 4;
+    elemOn(startX, startY);
+
+    // 버튼 식별
+    const btnTop = document.getElementById('btn-top');
+    const btnBottom = document.getElementById('btn-bottom');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+
+    // 버튼 위치 잡는 함수
+    function btnLocationLeft(button, value=2) {
+      button.style.left = value+'vh';
+    }function btnLocationRight(button, value=2) {
+      button.style.right = value+'vh';
+    }function btnLocationTop(button, value=2) {
+      button.style.top = value+'vh';
+    }function btnLocationBottom(button, value=2) {
+      button.style.bottom = value+'vh';
+    }
+    function btnLocation(button, img, location) {
+      location
+      button.style.position = 'absolute';
+      button.style.backgroundImage = `url('./SVG/day-arrow-off-${img}.svg')`
+    }
+
+    btnLocation(btnTop, '02', btnLocationTop(btnTop, 3));
+    btnLocation(btnLeft, '01', btnLocationLeft(btnLeft, 5));
+    btnLocation(btnRight, '03', btnLocationRight(btnRight, 5));
+    btnLocation(btnBottom, '04', btnLocationBottom(btnBottom, 3));
+
+
+    btnRight.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startX = startX+1;
+      
+      if(startX > 4) {
+        alert('이 방향으로는 더이상 움직일 수 없습니다.');
+        startX = startX-1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+
+      if(nowElement.dataset.block === '0'){
+        elemOn(startX, startY);
+
+      }else{
+        alert('길이 막혀 이동할 수 없습니다.');
+        startX = startX-1;
+        elemOn(startX, startY);
+      }
+    });
+
+    btnLeft.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startX = startX-1;
+      
+      if(startX < 0) {
+        alert('이 방향으로는 더이상 움직일 수 없습니다.');
+        startX = startX+1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+
+      if(startX >= 0 && nowElement.dataset.block === '0'){
+        elemOn(startX, startY);
+
+      } else {
+        alert('길이 막혀 이동할 수 없습니다.');
+        startX = startX+1;
+        elemOn(startX, startY);
+      }
+    });
+
+    btnTop.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startY = startY-1;
+      console.log(`${startX}, ${startY}`);
+      
+      if(startY < 0) {
+        alert('이 방향으로는 더이상 움직일 수 없습니다.');
+        startY = startY+1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+      // console.log(nowElement.id)
+
+      if(nowElement.id === '(4,1)') {
+        alert('토끼굴을 찾았습니다!');
+        elemOn(startX, startY);
+        
+        // 랜덤숫자 출력
+        function randomNumber(min=1, max=3) {
+          let ranNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+          return ranNumber;
+        };
+
+        setTimeout(function(){
+
+          let randomPage = randomNumber(1, 3);
+
+          if(randomPage === 1) {
+            location.href = './01-fidget-maze.html';
+          }else if(randomPage === 2) {
+            location.href = './02-fidget-click.html';
+          }else{
+            location.href = './03-fidget-bubble.html';
+          }
+        }, 1000);
+      }
+      
+      else if(startY >= 0 && nowElement.dataset.block === '0'){
+        elemOn(startX, startY);
+      
+      } else {
+        alert('길이 막혀 이동할 수 없습니다.');
+        startY = startY+1;
+        elemOn(startX, startY);
+      }
+    });
+
+    btnBottom.addEventListener('click', () => {
+      elemOff(startX, startY);
+      startY = startY+1;
+      
+      if(startY > 4) {
+        alert('이 방향으로는 더이상 움직일 수 없습니다.');
+        startY = startY-1;
+      }
+
+      // 식별
+      let nowElement = document.getElementById(`(${startX},${startY})`);
+
+      if(startY <= 4 && nowElement.dataset.block === '0'){
+        elemOn(startX, startY);
+
+      } else {
+        alert('길이 막혀 이동할 수 없습니다.');
+        startY = startY-1;
+        elemOn(startX, startY);
+      }
+    });
+
+  </script>
+</body>
+</html>
